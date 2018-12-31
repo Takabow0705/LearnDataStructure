@@ -21,14 +21,14 @@ func (as *ArrayStack) Size() int{
 }
 
 //配列の最後尾の要素を追加します
-func (as *ArrayStack) Pop() utils.V{
+func (as *ArrayStack) Pop() utils.T{
 	return as.Remove(as.n-1)
 }
 
 //配列の指定位置に要素を追加します
 //また、容量が不足している場合は
 //resize()を呼び出して、配列の大きさを増やします。
-func (as *ArrayStack) Add(i int,v utils.V){
+func (as *ArrayStack) Add(i int,v utils.T){
 
 	if as.is_full(){
 		as.resize()
@@ -44,7 +44,7 @@ func (as *ArrayStack) Add(i int,v utils.V){
 
 //i番目以降の要素を全てひとつ後ろにずらします。
 //これにより、i番目に新しい要素を入れることが可能となります。
-func (as *ArrayStack) Remove(i int)utils.V{
+func (as *ArrayStack) Remove(i int)utils.T{
 
 	ret := as.buf[i]
 	for j:= i; j < as.n-1; j++{
@@ -65,12 +65,12 @@ func (as *ArrayStack) Push(v utils.T){
 }
 
 //i番目の要素を返します。
-func (as *ArrayStack) Get(i int) utils.V{
+func (as *ArrayStack) Get(i int) utils.T{
 	return as.buf[i]
 }
 
 //i番目の要素をvで入れ替え、以前の要素を返す。
-func (as *ArrayStack) Set(i int,v utils.V) utils.V{
+func (as *ArrayStack) Set(i int,v utils.T) utils.T{
 	ret := as.buf[i]
 	as.buf[i] = v
 

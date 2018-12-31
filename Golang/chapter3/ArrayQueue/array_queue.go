@@ -18,7 +18,7 @@ func NewArrayQueue() ArrayQueue{
 //配列の指定位置に要素を追加します
 //また、容量が不足している場合は
 //resize()を呼び出して、配列の大きさを増やします。
-func (as *ArrayQueue) Add(i int,v utils.V){
+func (as *ArrayQueue) Add(v utils.T){
 
 	if as.is_full(){
 		as.resize()
@@ -30,7 +30,7 @@ func (as *ArrayQueue) Add(i int,v utils.V){
 
 //i番目以降の要素を全てひとつ後ろにずらします。
 //これにより、i番目に新しい要素を入れることが可能となります。
-func (as *ArrayQueue) Remove(i int)utils.V{
+func (as *ArrayQueue) Remove(i int)utils.T{
 
 	ret := as.buf[as.i]
 	as.i = (as.i  + 1)%as.cap
