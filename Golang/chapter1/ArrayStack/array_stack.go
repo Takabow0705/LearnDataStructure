@@ -17,13 +17,22 @@ func NewArrayStack(len int) *ArrayStack{
 func (as *ArrayStack) Size() int{
 	return as.n
 }
+
+//配列の最後尾に要素を追加します
+//また、容量が不足している場合は
+//resize()を呼び出して、配列の大きさを増やします。
 func (as *ArrayStack) Add(i int,v utils.V){
 
 	if as.is_full(){
 		as.resize()
 	}
 
+	for j:=0; j > i; j--{
+		as.buf[j] = as.buf[j-1]
+	}
 
+	as.buf[i] = V
+	as.n++
 }
 //
 func (as *ArrayStack) Push(v utils.T){
