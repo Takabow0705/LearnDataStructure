@@ -7,9 +7,9 @@ func Compare(a,b T) int{
 }
 
 func Max(a,b T) int{
-	if Compare < 0{
-		return b
+	if Compare(a,b) < 0{
+		return int(b)
 	}else{
-		return a
+		return int(a)
 	}
 }
