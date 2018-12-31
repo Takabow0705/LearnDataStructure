@@ -3,23 +3,19 @@ package main
 import(
 	"fmt"
 	"./ArrayStack"
-	"./ArrayQueue"
+	"./ArrayStack/utils"
 )
 
 func main(){
 	stack := array_stack.NewArrayStack()
-	queue := array_queue.NewArrayQueue()
 
 	fmt.Println(stack.Size())
-	stack.Add(0,3)
-	stack.Add(1,45)
-	stack.Add(2,22)
+	stack.Add(0,utils.T(3))
+	stack.Add(1,utils.T(45))
+	stack.Add(2,utils.T(232))
 	fmt.Println(stack.Size())
-
-	fmt.Println(queue.Size())
-	queue.Add(0,3)
-	queue.Add(1,45)
-	queue.Add(2,22)
-	fmt.Println(queue.Size())	
+	stack.Add(3,utils.T(45))
+	stack.Add(5,utils.T(232))
+	fmt.Println(stack.Size())
 	
 }
