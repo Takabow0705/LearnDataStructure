@@ -8,8 +8,7 @@ RUN apt-get update && \
     git \
     curl \
     wget \
-    && echo 'export PS1="[\[\e[0;34m\]\h\[\e[0m@\e[0;33m\]\w\e[0m]\\n$"' >> ~/.bashrc \
-
+    && echo 'export PS1="[\[\e[0;34m\]\h\[\e[0m@\e[0;33m\]\w\e[0m]\\n$"' >> ~/.bashrc 
 
 ENV GOPATH=/usr/lib/go-1.10/bin
 ENV PATH=$GOPATH:$PATH
