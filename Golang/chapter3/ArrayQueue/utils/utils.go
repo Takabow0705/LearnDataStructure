@@ -8,8 +8,8 @@ func Compare(a,b T) int{
 
 func Max(a,b T) int{
 	if Compare(a,b) < 0{
-		return b
+		return int(b)
 	}else{
-		return a
+		return int(a)
 	}
 }
