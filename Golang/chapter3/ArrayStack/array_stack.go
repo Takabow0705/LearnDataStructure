@@ -5,7 +5,7 @@ import(
 )
 
 type ArrayStack struct{
-	buffer []utils.T
+	buf []utils.T
 	n ,cap int
 }
 
@@ -38,7 +38,7 @@ func (as *ArrayStack) Add(i int,v utils.T){
 		as.buf[j] = as.buf[j-1]
 	}
 
-	as.buf[i] = V
+	as.buf[i] = v
 	as.n++
 }
 

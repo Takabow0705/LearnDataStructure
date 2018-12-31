@@ -5,7 +5,7 @@ import(
 )
 
 type ArrayQueue struct{
-	buffer []utils.T
+	buf []utils.T
 	n ,cap ,i int
 }
 
@@ -52,7 +52,7 @@ func (as *ArrayQueue) is_full() bool{
 //それまでのデータをコピーして
 //新しい配列をレシーバの構造体の配列として再設定します。
 func (as *ArrayQueue) resize(){
-	cap_new = utils.Max(2 * as.n,1) 
+	cap_new := utils.Max(2 * as.n,1) 
 	buf_new := make([]utils.T,cap_new)
 
 	for i:=0; i < as.n; i++{
