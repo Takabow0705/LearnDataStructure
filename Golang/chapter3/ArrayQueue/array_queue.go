@@ -30,7 +30,7 @@ func (as *ArrayQueue) Add(v utils.T){
 
 //i番目以降の要素を全てひとつ後ろにずらします。
 //これにより、i番目に新しい要素を入れることが可能となります。
-func (as *ArrayQueue) Remove(i int)utils.T{
+func (as *ArrayQueue) Remove()utils.T{
 
 	ret := as.buf[as.i]
 	as.i = (as.i  + 1)%as.cap
