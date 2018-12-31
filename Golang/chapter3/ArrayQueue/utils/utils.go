@@ -2,7 +2,7 @@ package utils
 
 type T int
 
-func Compare(a,b int) int{
+func Compare(a,b T) int{
 	return int(b-a)
 }
 
