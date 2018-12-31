@@ -9,8 +9,10 @@ type ArrayStack struct{
 	n ,cap int
 }
 
-func NewArrayStack(len int) *ArrayStack{
-	return *ArrayStack
+//ArrayStack構造体を作成します。
+//呼び出し時は大きさ１の配列を持ちます。すなわちn = 1
+func NewArrayStack() ArrayStack{
+	return ArrayStack{}
 }
 
 //ここでのサイズは配列の最大容量のことです。
@@ -18,6 +20,7 @@ func (as *ArrayStack) Size() int{
 	return as.n
 }
 
+//配列の最後尾の要素を追加します
 func (as *ArrayStack) Pop() utils.V{
 	return as.Remove(as.n-1)
 }
@@ -39,6 +42,8 @@ func (as *ArrayStack) Add(i int,v utils.V){
 	as.n++
 }
 
+//i番目以降の要素を全てひとつ後ろにずらします。
+//これにより、i番目に新しい要素を入れることが可能となります。
 func (as *ArrayStack) Remove(i int)utils.V{
 
 	ret := as.buf[i]
