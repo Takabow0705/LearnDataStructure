@@ -6,10 +6,10 @@ func Compare(a,b T) int{
 	return int(b-a)
 }
 
-func Max(a,b T) int{
+func Max(a,b int) int{
 	if Compare(a,b) < 0{
-		return int(b)
+		return b
 	}else{
-		return int(a)
+		return a
 	}
 }
