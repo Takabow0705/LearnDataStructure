@@ -25,7 +25,7 @@ func (ad *ArrayDeque) Add(i int ,v utils.T){
 	}
 
 	if i < ad.n/2{
-		ad.i = select_index()
+		ad.i = ad.select_index()
 		for j := 0; j < i; j++ {
 			ad.buf[(j + i)%ad.cap] = ad.buf[(j + i + 1)%ad.cap]
 		}
@@ -40,17 +40,17 @@ func (ad *ArrayDeque) Add(i int ,v utils.T){
 
 //i番目以降の要素を全てひとつ後ろにずらします。
 //これにより、i番目に新しい要素を入れることが可能となります。
-func (ad *ArrayDeque) Remove(int i)utils.T{
+func (ad *ArrayDeque) Remove(i int)utils.T{
 
 	ret := ad.buf[(i + ad.i)%ad.cap]
 	if i < ad.n/2{
 		for k := i; k > 0; k--{
-			a[(i + k)%ad.cap] = a[(i + k - 1)%ad.cap]
+			ad.buf[(i + k)%ad.cap] = ad.buf[(i + k - 1)%ad.cap]
 		}
 		ad.i = (i + 1)%ad.cap
 	}else{
 		for k := i; k < ad.cap; k++{
-			a[(i + k)%ad.cap] = a[(i + k - 1)%ad.cap]
+			ad.buf[(i + k)%ad.cap] = ad.buf[(i + k - 1)%ad.cap]
 		}
 	}
 	ad.n--
@@ -64,19 +64,19 @@ func (ad *ArrayDeque) Remove(int i)utils.T{
 
 //ここでのサイズは配列の最大容量のことです。
 func (ad *ArrayDeque) Size() int{
-	return ad.n
+	return ad.cap
 }
 
 //削除対象の要素を返します。
 func (ad *ArrayDeque) Get(i int) utils.T{
-	return ad.buf[(j + i)%ad.cap]
+	return ad.buf[(ad.i + i)%ad.cap]
 }
 
 //i番目の要素をvで入れ替え、以前の要素を返す。
 func (ad *ArrayDeque) Set(i int,v utils.T) utils.T{
-	ret := ad.buf[(j + i)%ad.cap]
+	ret := ad.buf[(ad.i + i)%ad.cap]
 
-	ad.buf[(j + i)%ad.cap] = v
+	ad.buf[(ad.i + i)%ad.cap] = v
 
 	return ret
 }
@@ -109,9 +109,9 @@ func (ad *ArrayDeque) is_sparse() bool{
 //削除対象インデックスの値に応じてインデックスを再設定する
 //Add(i int,x utils.T)の補助メソッド
 func (ad *ArrayDeque) select_index() int{
-	if i == 0{
+	if ad.i == 0{
 		return ad.cap - 1
 	}else{
-		return i - 1
+		return ad.i - 1
 	}
 }
