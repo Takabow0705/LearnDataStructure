@@ -43,6 +43,15 @@ func (as *ArrayQueue) Remove()utils.T{
 	return ret
 }
 
+//ここでのサイズは配列の最大容量のことです。
+func (as *ArrayQueue) Size() int{
+	return as.n
+}
+
+//削除対象の要素を返します。
+func (as *ArrayQueue) Get() utils.T{
+	return as.buf[i]
+}
 //使用されている配列の要素数と配列の容量を比較します。
 func (as *ArrayQueue) is_full() bool{
 	return as.n == as.cap
