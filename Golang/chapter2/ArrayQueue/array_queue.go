@@ -1,7 +1,7 @@
 package array_queue
 
 import(
-	"./utils"
+	"github.com/Takabow0705/LearnDataStructure/tree/master/Golang/utils"
 )
 
 type ArrayQueue struct{

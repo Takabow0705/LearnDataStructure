@@ -1,7 +1,7 @@
 package array_deque
 
 import (
-	"./utils"
+	"github.com/Takabow0705/LearnDataStructure/tree/master/Golang/utils"
 )
 
 type ArrayDeque struct{
