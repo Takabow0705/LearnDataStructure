@@ -27,11 +27,11 @@ func (ad *ArrayDeque) Add(i int ,v utils.T){
 	if i < ad.n/2{
 		ad.i = select_index()
 		for j := 0; j < i; j++ {
-			ad.buf[(j + i)%as.cap] = ad.buf[(j + i + 1)%as.cap]
+			ad.buf[(j + i)%ad.cap] = ad.buf[(j + i + 1)%ad.cap]
 		}
 	}else{
-		for j := ad.n; j > i; j--{
-			ad.buf[(j + i)%as.cap] = ad.buf[(j + i - 1)%as.cap]
+		for j := ad.n; j > i; j-- {
+			ad.buf[(j + i)%ad.cap] = ad.buf[(j + i - 1)%ad.cap]
 		}
 	}
 	ad.buf[(ad.i + i)%ad.cap] = v
@@ -40,10 +40,19 @@ func (ad *ArrayDeque) Add(i int ,v utils.T){
 
 //i番目以降の要素を全てひとつ後ろにずらします。
 //これにより、i番目に新しい要素を入れることが可能となります。
-func (ad *ArrayDeque) Remove()utils.T{
+func (ad *ArrayDeque) Remove(int i)utils.T{
 
-	ret := ad.buf[ad.i]
-	ad.i = (ad.i  + 1)%ad.cap
+	ret := ad.buf[(i + ad.i)%ad.cap]
+	if i < ad.n/2{
+		for k := i; k > 0; k--{
+			a[(i + k)%ad.cap] = a[(i + k - 1)%ad.cap]
+		}
+		ad.i = (i + 1)%ad.cap
+	}else{
+		for k := i; k < ad.cap; k++{
+			a[(i + k)%ad.cap] = a[(i + k - 1)%ad.cap]
+		}
+	}
 	ad.n--
 
 	if ad.is_sparse(){
