@@ -24,11 +24,17 @@ func (ad *ArrayDeque) Add(i int ,v utils.T){
 		ad.resize()
 	}
 
-	if i < ad.cap/2{
+	if i < ad.n/2{
 		ad.i = select_index()
-
+		for j := 0; j < i; j++ {
+			ad.buf[(j + i)%as.cap] = ad.buf[(j + i + 1)%as.cap]
+		}
+	}else{
+		for j := ad.n; j > i; j--{
+			ad.buf[(j + i)%as.cap] = ad.buf[(j + i - 1)%as.cap]
+		}
 	}
-	ad.buf[(ad.i + ad.n)%ad.cap] = v
+	ad.buf[(ad.i + i)%ad.cap] = v
 	ad.n++
 }
 
