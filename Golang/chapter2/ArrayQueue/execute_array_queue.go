@@ -2,12 +2,12 @@ package main
 
 import(
 	"fmt"
-	"./array_stack"
+	"./array_queue"
 	"../../utils"
 )
 
 func main(){
-	stack := array_stack.NewArrayStack()
+	stack := array_queue.NewArrayStack()
 
 	fmt.Println(stack.Size())
 	stack.Add(0,utils.T(3))

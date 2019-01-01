@@ -1,7 +1,7 @@
 package array_stack
 
 import(
-	"github.com/Takabow0705/LearnDataStructure/tree/master/Golang/utils"
+	"../../../utils"
 )
 
 type ArrayStack struct{
