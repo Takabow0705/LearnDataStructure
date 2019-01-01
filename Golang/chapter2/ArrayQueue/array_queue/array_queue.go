@@ -50,7 +50,7 @@ func (aq *ArrayQueue) Size() int{
 
 //削除対象の要素を返します。
 func (aq *ArrayQueue) Get() utils.T{
-	return aq.buf[i]
+	return aq.buf[aq.i]
 }
 //使用されている配列の要素数と配列の容量を比較します。
 func (aq *ArrayQueue) is_full() bool{
