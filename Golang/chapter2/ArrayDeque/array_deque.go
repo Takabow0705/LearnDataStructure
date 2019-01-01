@@ -5,7 +5,7 @@ import (
 )
 
 type ArrayDeque struct{
-	n,j,cap int
+	n,i,cap int
 	buf []utils.T
 }
 
@@ -18,71 +18,85 @@ func NewArrayDeque() ArrayDeque{
 //配列の指定位置に要素を追加します
 //また、容量が不足している場合は
 //resize()を呼び出して、配列の大きさを増やします。
-func (as *ArrayDeque) Add(v utils.T){
+func (ad *ArrayDeque) Add(i int ,v utils.T){
 
-	if as.is_full(){
-		as.resize()
+	if ad.is_full(){
+		ad.resize()
 	}
 
-	as.buf[(as.i + as.n)%as.cap] = v
-	as.n++
+	if i < ad.cap/2{
+		ad.i = select_index()
+
+	}
+	ad.buf[(ad.i + ad.n)%ad.cap] = v
+	ad.n++
 }
 
 //i番目以降の要素を全てひとつ後ろにずらします。
 //これにより、i番目に新しい要素を入れることが可能となります。
-func (as *ArrayDeque) Remove()utils.T{
+func (ad *ArrayDeque) Remove()utils.T{
 
-	ret := as.buf[as.i]
-	as.i = (as.i  + 1)%as.cap
-	as.n--
+	ret := ad.buf[ad.i]
+	ad.i = (ad.i  + 1)%ad.cap
+	ad.n--
 
-	if as.is_sparse(){
-		as.resize()
+	if ad.is_sparse(){
+		ad.resize()
 	}
 
 	return ret
 }
 
 //ここでのサイズは配列の最大容量のことです。
-func (as *ArrayDeque) Size() int{
-	return as.n
+func (ad *ArrayDeque) Size() int{
+	return ad.n
 }
 
 //削除対象の要素を返します。
-func (as *ArrayDeque) Get(i int) utils.T{
-	return as.buf[(j + i)%as.cap]
+func (ad *ArrayDeque) Get(i int) utils.T{
+	return ad.buf[(j + i)%ad.cap]
 }
 
 //i番目の要素をvで入れ替え、以前の要素を返す。
-func (as *ArrayDeque) Set(i int,v utils.T) utils.T{
-	ret := as.buf[(j + i)%as.cap]
+func (ad *ArrayDeque) Set(i int,v utils.T) utils.T{
+	ret := ad.buf[(j + i)%ad.cap]
 
-	as.buf[(j + i)%as.cap] = v
+	ad.buf[(j + i)%ad.cap] = v
 
 	return ret
 }
 //使用されている配列の要素数と配列の容量を比較します。
-func (as *ArrayDeque) is_full() bool{
-	return as.n == as.cap
+func (ad *ArrayDeque) is_full() bool{
+	return ad.n == ad.cap
 }
 
 //既存の配列の二倍の大きさをもつ配列を作成し,
 //それまでのデータをコピーして
 //新しい配列をレシーバの構造体の配列として再設定します。
-func (as *ArrayDeque) resize(){
-	cap_new := utils.Max(2 * as.n,1) 
+func (ad *ArrayDeque) resize(){
+	cap_new := utils.Max(2 * ad.n,1) 
 	buf_new := make([]utils.T,cap_new)
 
-	for i:=0; i < as.n; i++{
-		buf_new[i] = as.buf[(i+as.i)%as.cap]
+	for i:=0; i < ad.n; i++{
+		buf_new[i] = ad.buf[(i+ad.i)%ad.cap]
 	}
 
-	as.buf = buf_new
-	as.cap = cap_new
-	as.i = 0
+	ad.buf = buf_new
+	ad.cap = cap_new
+	ad.i = 0
 }
 
 //配列の容量に余裕があるかを判定します
-func (as *ArrayDeque) is_sparse() bool{
-	return len(as.buf) >= 3 * as.n
+func (ad *ArrayDeque) is_sparse() bool{
+	return len(ad.buf) >= 3 * ad.n
+}
+
+//削除対象インデックスの値に応じてインデックスを再設定する
+//Add(i int,x utils.T)の補助メソッド
+func (ad *ArrayDeque) select_index() int{
+	if i == 0{
+		return ad.cap - 1
+	}else{
+		return i - 1
+	}
 }
