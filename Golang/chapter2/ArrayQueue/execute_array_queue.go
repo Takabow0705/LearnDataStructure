@@ -7,15 +7,15 @@ import(
 )
 
 func main(){
-	stack := array_queue.NewArrayQueue()
+	queue := array_queue.NewArrayQueue()
 
-	fmt.Println(stack.Size())
-	stack.Add(utils.T(3))
-	stack.Add(utils.T(45))
-	stack.Add(utils.T(232))
-	fmt.Println(stack.Size())
-	stack.Add(utils.T(45))
-	stack.Add(utils.T(232))
-	fmt.Println(stack.Size())
+	fmt.Println(queue.Size())
+	queue.Add(utils.T(3))
+	queue.Add(utils.T(45))
+	queue.Add(utils.T(232))
+	fmt.Println(queue.Size())
+	queue.Add(utils.T(45))
+	queue.Add(utils.T(232))
+	fmt.Println(queue.Size())
 	
 }
