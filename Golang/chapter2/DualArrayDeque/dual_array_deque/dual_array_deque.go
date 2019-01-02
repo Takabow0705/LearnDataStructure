@@ -6,7 +6,7 @@ import(
 
 type DualArrayDeque struct{
 	n int
-	front,back ArrayStack
+	front,back *ArrayStack
 }
 
 func NewDualArrayDeque() DualArrayDeque {
