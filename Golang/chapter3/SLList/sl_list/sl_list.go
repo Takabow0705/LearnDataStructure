@@ -1,8 +1,5 @@
 package sl_list
 
-import(
-	../../utils
-)
 
 type node struct{
 	x string
@@ -21,12 +18,12 @@ type SLList struct{
 	tail *node
 }
 
-func newSLList() *SLList{
+func NewSLList() *SLList{
 	return new(SLList)
 }
 
 //SLListの大きさを返します。
-func (sl *SLList) Size(){
+func (sl *SLList) Size() int{
 	return sl.n
 }
 
@@ -39,16 +36,16 @@ func (sl *SLList) Push(x string){
 	node_new.next = sl.head
 	sl.head = node_new
 
-	if n == 0{
-		tail = node_new
+	if sl.n == 0{
+		sl.tail = node_new
 	}
 	sl.n++
 }
 
-//要素を取り出した後削除
+//要素の先頭を取り出した後削除
 //要素がない場合はnilを返す。
 //n = 1ならtail はnil
-func(sl *SLList) Pop() string{
+func(sl *SLList) Pop() interface{}{
 	if sl.n == 0{
 		return nil
 	}
@@ -75,7 +72,7 @@ func (sl *SLList) Remove(){
 func (sl *SLList) Add(x string){
 	node_new := newNode(x)
 
-	if n == 0{
+	if sl.n == 0{
 		sl.head = node_new
 	}else{
 		sl.tail.next = node_new
