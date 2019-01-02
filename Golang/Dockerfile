@@ -10,9 +10,10 @@ RUN apt-get update && \
     wget \
     && echo 'export PS1="[\[\e[0;34m\]\h\[\e[0m@\e[0;33m\]\w\e[0m]\\n$"' >> ~/.bashrc 
 
-ENV GOPATH=/usr/lib/go-1.10/bin
-ENV PATH=$GOPATH:$PATH
 
-WORKDIR /usr/app
+WORKDIR /go
+
+ENV GOPATH=$HOME/go
+ENV PATH=/usr/lib/go-1.10/bin:$PATH
 
 CMD [ "/bin/bash" ]
