@@ -44,6 +44,10 @@ func (da *DualArrayDeque) Set(i int,x utils.T) utils.T{
 	}
 }
 
+//frontとbackのどちらかに要素を追加する。
+//追加後にfrontとbackで要素数がなるべく等しくなるように
+//balance()を呼び出す。
+//ArrayQueue同様に追加後はnを1増やす。
 func (da *DualArrayDeque) Add(i int, x utils.T){
 	if i < da.front.Size(){
 		da.front.Add(da.front.Size() - i ,x)
@@ -55,6 +59,10 @@ func (da *DualArrayDeque) Add(i int, x utils.T){
 	da.n++
 }
 
+//frontとbackのどちらかの要素を削除する。
+//削除後にfrontとbackで要素数がなるべく等しくなるように
+//balance()を呼び出す。
+//ArrayQueue同様に追加後はnを1減らす。
 func (da *DualArrayDeque) Remove(i int) utils.T{
 	var result utils.T
 	if i < da.front.Size(){
@@ -68,6 +76,8 @@ func (da *DualArrayDeque) Remove(i int) utils.T{
 	return result
 }
 
+//frontとbackの要素数の差が三倍以上となることが無いように
+//frontとbackを調整する。
 func (da *DualArrayDeque) balance(){
 	front_size := da.front.Size()
 	back_size := da.back.Size()
