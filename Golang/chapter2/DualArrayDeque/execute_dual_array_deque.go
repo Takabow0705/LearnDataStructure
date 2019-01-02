@@ -10,6 +10,7 @@ func main(){
 
 	dad := dual_array_deque.NewDualArrayDeque()
 
+	//ToDo not use resize() and balance()?
 	fmt.Println(dad.Size())
 	dad.Add(0,utils.T(3))
 	dad.Add(0,utils.T(45))
