@@ -17,7 +17,7 @@ func NewArrayStack() ArrayStack{
 
 //ここでのサイズは配列の最大容量のことです。
 func (as *ArrayStack) Size() int{
-	return as.n
+	return cap(as.buf)
 }
 
 //配列の最後尾の要素を追加します
@@ -78,7 +78,7 @@ func (as *ArrayStack) Set(i int,v utils.T) utils.T{
 }
 //使用されている配列の要素数と配列の容量を比較します。
 func (as *ArrayStack) is_full() bool{
-	return as.n == as.cap
+	return as.n == cap(as.buf)
 }
 
 //既存の配列の二倍の大きさをもつ配列を作成し,

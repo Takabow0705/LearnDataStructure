@@ -2,7 +2,6 @@ package dual_array_deque
 
 import(
 	"../../../utils"
-	"array_stack"
 )
 
 type DualArrayDeque struct{
@@ -10,10 +9,10 @@ type DualArrayDeque struct{
 	front,back ArrayStack
 }
 
-func NewDualArrayStack() DualArrayDeque {
+func NewDualArrayDeque() DualArrayDeque {
 	return DualArrayDeque{
-		front: array_stack.NewArrayStack(),
-		back:  array_stack.NewArrayStack(),
+		front: NewArrayStack(),
+		back:  NewArrayStack(),
 	}
 }
 //ふたつのArrayStackのサイズの合計を
@@ -86,12 +85,12 @@ func (da *DualArrayDeque) balance(){
 		n := front_size + back_size
 		half_n := n/2
 
-		front_new := array_stack.NewArrayStack()
+		front_new := NewArrayStack()
 		for i := half_n - 1; i >= 0; i-- {
 			front_new.Push(da.Get(i))
 		}
 
-		back_new := array_stack.NewArrayStack()
+		back_new := NewArrayStack()
 		for i := 0; i < half_n; i++ {
 			back_new.Push(da.Get(half_n + i))
 		}
