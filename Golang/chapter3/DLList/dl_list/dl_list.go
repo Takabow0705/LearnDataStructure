@@ -64,5 +64,44 @@ func (dl *DLList) Set(i int, x string) string{
 	return y
 }
 
+//node wの直前にnode uを追加する。
+//dummy のおかげでprevやnextの対象nodeが存在しなくても
+//ロジックが複雑にはならない
+func (dl *DLList) add_before(w *node,x string) *node{
+	u := new(node)
+	u.x = x
+	u.prev = w.prev
+	u.next = w
 
+	u.prev.next = u
+	u.next.prev = u
+
+	dl.n++
+	return u
+}
+
+func (dl *DLList) add_i(i int,x string){
+	dl.add_before(sl.get_node(i),x)
+}
+
+func (dl *DLList) Add(x string){
+	dl.add_i(dl.n,x)
+}
+
+//p61上段の見本コードを実装
+//Remove()の補助メソッド
+func (dl *DLList) remove_i(i int) string{
+	 p := get_node(i)
+
+	 u := p.x
+	 p.prev.next = p.next
+	 p.next.prev = p.prev
+	 l.n--
+	 return u
+}
+
+//指定されたindexの要素を削除する
+func (dl *DLList) Remove(i int) string{
+	return dl.remove_i(i)
+}
 
