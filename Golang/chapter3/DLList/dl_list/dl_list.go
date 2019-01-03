@@ -28,6 +28,10 @@ func CreateDLList() *DLList{
 		n : 0,
 	}
 }
+//DLListの大きさを返します。
+func (dl *DLList) Size() int{
+	return dl.n
+}
 
 //与えられたindexのnodeを返す。
 //indexの値がデータの要素数の中央の値からみて
