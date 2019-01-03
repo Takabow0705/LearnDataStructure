@@ -83,7 +83,7 @@ func (dl *DLList) add_before(w *node,x string) *node{
 func (dl *DLList) add_i(i int,x string){
 	dl.add_before(sl.get_node(i),x)
 }
-
+//要素を先頭に追加
 func (dl *DLList) Add(x string){
 	dl.add_i(dl.n,x)
 }
