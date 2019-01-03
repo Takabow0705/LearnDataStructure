@@ -105,3 +105,8 @@ func (dl *DLList) Remove(i int) string{
 	return dl.remove_i(i)
 }
 
+//最後の要素を削除する
+func (dl *DLList) Pop() string{
+	return dl.remove_i(dl.n - 1)
+}
+
