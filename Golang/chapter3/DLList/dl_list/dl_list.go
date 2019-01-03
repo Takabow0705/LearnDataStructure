@@ -7,7 +7,7 @@ type node struct{
 }
 
 //内部でnode構造体を生成するメソッド
-func createNode(x) *node{
+func createNode(x string) *node{
 	return &node{
 		x : x,
 	}
@@ -57,7 +57,7 @@ func (dl *DLList) Get(i int) string{
 //指定されたindexに対応するnode構造体の要素に新しい要素を上書きする。
 //その後、古い要素を返却する
 func (dl *DLList) Set(i int, x string) string{
-	u := get_node(i)
+	u := dl.get_node(i)
 	y := u.x
 	u.x = x
 
@@ -81,7 +81,7 @@ func (dl *DLList) add_before(w *node,x string) *node{
 }
 
 func (dl *DLList) add_i(i int,x string){
-	dl.add_before(sl.get_node(i),x)
+	dl.add_before(dl.get_node(i),x)
 }
 //要素を先頭に追加
 func (dl *DLList) Add(x string){
@@ -91,12 +91,12 @@ func (dl *DLList) Add(x string){
 //p61上段の見本コードを実装
 //Remove()の補助メソッド
 func (dl *DLList) remove_i(i int) string{
-	 p := get_node(i)
+	 p := dl.get_node(i)
 
 	 u := p.x
 	 p.prev.next = p.next
 	 p.next.prev = p.prev
-	 l.n--
+	 dl.n--
 	 return u
 }
 
