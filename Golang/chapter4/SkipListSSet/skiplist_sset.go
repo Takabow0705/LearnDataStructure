@@ -49,19 +49,34 @@ func NewSkipListSSet() *SkipListSSet{
 	return &s
 }
 
+//探索経路に沿ってy>=xとなるyを含むnodeを返します。
 //
-func (ss *SkipListSSet) findPredNode(x string) *node{
+func (ss *SkipListSSet) findPredNode(x int) *node{
 	u := ss.sentinel
 	r = ss.height
 
-	for r > 0{
+	for r >= 0{
 		for u.nexts[r] != nil && Compare(u.nexts[r].x,x){
 			u = u.nexts[r]
 		}
 		r--
 	}
-
 	return u
 }
 
-func (ss *SkipListSSet) Find(x int)
+//探索経路に沿ってy>=xとなるyを含むyと探索結果を返します。
+//ok : 探索結果　true => 成功　:  false => 失敗
+//result : 探索結果の値
+func (ss *SkipListSSet) Find(x int) (ok bool ,result int){
+	u := ss.findPredNode(x)
+	if u.nexts[0] == nil{
+		result = u.nexts[0].x
+		ok = true
+		return ok,result
+	}else{
+		result = 0
+		ok = false
+		return  ok,result
+	}
+	
+}
