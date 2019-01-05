@@ -7,7 +7,7 @@ import(
 type node struct{
 	x string
 	height int
-	next []*node
+	nexts []*node
 }
 
 //新しいnodeの高さを乱数で設定します。
@@ -27,6 +27,6 @@ func newNode(x string,h int) *node{
 	return &node{
 		x : x,
 		height : h,
-		next : make([]*node,h + 1),
+		nexts : make([]*node,h + 1),
 	}
 }
