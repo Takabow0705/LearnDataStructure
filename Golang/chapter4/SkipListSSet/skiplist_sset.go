@@ -2,6 +2,7 @@ package skiplist_sset
 
 import(
 	"math/rand"
+	"strconv"
 )
 
 type node struct{
@@ -29,4 +30,20 @@ func newNode(x string,h int) *node{
 		height : h,
 		nexts : make([]*node,h + 1),
 	}
+}
+
+//strconv.IntSize() は　bit or uintのサイズを返す
+type SkipListSSet struct{
+	sentinel *node
+	n int
+	height int
+	stack     [strconv.IntSize]*node
+}
+
+func NewSkipListSSet() *SkipListSSet{
+	s := SkipListSSet{
+		sentinel : newNode("", strconv.IntSize), //ToDo 初期値は""で良いのか
+	}
+	s.stack[0] = s.sentinel
+	return &s
 }
