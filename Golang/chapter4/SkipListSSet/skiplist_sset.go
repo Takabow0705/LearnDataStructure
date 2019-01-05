@@ -3,10 +3,11 @@ package skiplist_sset
 import(
 	"math/rand"
 	"strconv"
+	"../../utils"
 )
 
 type node struct{
-	x string
+	x int
 	height int
 	nexts []*node
 }
@@ -24,7 +25,7 @@ func pickHeight() int{
 	return height
 }
 
-func newNode(x string,h int) *node{
+func newNode(x int,h int) *node{
 	return &node{
 		x : x,
 		height : h,
@@ -42,8 +43,25 @@ type SkipListSSet struct{
 
 func NewSkipListSSet() *SkipListSSet{
 	s := SkipListSSet{
-		sentinel : newNode("", strconv.IntSize), //ToDo 初期値は""で良いのか
+		sentinel : newNode(0, strconv.IntSize), //ToDo 初期値は""で良いのか
 	}
 	s.stack[0] = s.sentinel
 	return &s
 }
+
+//
+func (ss *SkipListSSet) findPredNode(x string) *node{
+	u := ss.sentinel
+	r = ss.height
+
+	for r > 0{
+		for u.nexts[r] != nil && Compare(u.nexts[r].x,x){
+			u = u.nexts[r]
+		}
+		r--
+	}
+
+	return u
+}
+
+func (ss *SkipListSSet) Find(x int)
