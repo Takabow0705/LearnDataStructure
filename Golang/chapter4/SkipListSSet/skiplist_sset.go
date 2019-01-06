@@ -80,3 +80,33 @@ func (ss *SkipListSSet) Find(x int) (ok bool ,result int){
 	}
 	
 }
+
+//
+func(ss * SkipListSSet) Add(x int) bool{
+	u := ss.sentinel
+	r := ss.height
+	comp := 0
+
+	for r >= 0{
+		for u.nexts[r] != nil && utils.Compare(u.nexts[r].x, x) < 0 {
+			u = u.nexts[r]
+		}
+		if u.nexts[r] != nil && utils.Compare(u.nexts[r].x, x) == 0 {
+			return false
+		}
+		ss.stack[r] = u
+		r--
+	}
+
+	w := ss.newNode(x,pickHeight())
+	for ss.height < w.height {
+		ss.height++
+		ss.stack[ss.height] = ss.sentinel
+	}
+	for i := 0; i <= w.height; i++ {
+		w.nexts[i] = ss.stack[i].nexts[i]
+		ss.stack[i].nexts[i] = w
+	}
+	ss.n++
+	return true
+}
