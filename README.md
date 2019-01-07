@@ -18,7 +18,7 @@ FIFO Queue => Queue
 
 Stackの場合、add(x),remove()をそれぞれpush(x),pop()と呼んで区別する。
 
-## 2.List interface
+### 2.List interface
 
 以下の操作を持つデータ構造のこと
 
