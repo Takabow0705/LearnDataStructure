@@ -116,7 +116,6 @@ func (ss *SkipListSSet) remove(x int) bool{
 	ok  = false
 	u := ss.sentinel
 	r := height
-	comp := 0
 
 	for r >= 0{
 		for u.nexts[r] != nil && utils.Compare(u.nexts[r].x,x) < 0{
