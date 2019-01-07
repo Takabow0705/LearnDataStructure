@@ -110,3 +110,29 @@ func(ss * SkipListSSet) Add(x int) bool{
 	ss.n++
 	return true
 }
+
+//
+func (ss *SkipListSSet) remove(x int) bool{
+	ok  = false
+	u := ss.sentinel
+	r := height
+	comp := 0
+
+	for r >= 0{
+		for u.nexts[r] != nil && utils.Compare(u.nexts[r].x,x) < 0{
+			u = u.nexts[r]
+		}
+
+		if u.nexts[r] != nil && utils.Compare(u.nexts[r].x,x) == 0{
+			ok = true
+			del = u.nexts[r]
+
+			u.nexts[r] = u.nexts[r].nexts[r]
+			if u == ss.sentinel && u.nexts[r] != nil{
+				height--
+			}
+		}
+		r--
+	}
+	return ok
+}
