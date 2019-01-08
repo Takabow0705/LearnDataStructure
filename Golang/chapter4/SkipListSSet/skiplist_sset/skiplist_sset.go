@@ -3,7 +3,7 @@ package skiplist_sset
 import(
 	"math/rand"
 	"strconv"
-	"../../utils"
+	"../../../utils"
 )
 
 type node struct{
@@ -39,6 +39,10 @@ type SkipListSSet struct{
 	n int
 	height int
 	stack     [strconv.IntSize]*node
+}
+
+func (ss *SkipListSSet) Size() int{
+	return ss.n
 }
 
 func NewSkipListSSet() *SkipListSSet{
@@ -112,7 +116,7 @@ func(ss * SkipListSSet) Add(x int) bool{
 }
 
 //
-func (ss *SkipListSSet) remove(x int) bool{
+func (ss *SkipListSSet) Remove(x int) bool{
 	ok  = false
 	u := ss.sentinel
 	r := height
