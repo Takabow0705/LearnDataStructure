@@ -57,10 +57,10 @@ func NewSkipListSSet() *SkipListSSet{
 //
 func (ss *SkipListSSet) findPredNode(x int) *node{
 	u := ss.sentinel
-	r = ss.height
+	r := ss.height
 
 	for r >= 0{
-		for u.nexts[r] != nil && Compare(u.nexts[r].x,x){
+		for u.nexts[r] != nil && utils.IntCompare(u.nexts[r].x,x) < 0{
 			u = u.nexts[r]
 		}
 		r--
@@ -89,20 +89,19 @@ func (ss *SkipListSSet) Find(x int) (ok bool ,result int){
 func(ss * SkipListSSet) Add(x int) bool{
 	u := ss.sentinel
 	r := ss.height
-	comp := 0
 
 	for r >= 0{
-		for u.nexts[r] != nil && utils.Compare(u.nexts[r].x, x) < 0 {
+		for u.nexts[r] != nil && utils.IntCompare(u.nexts[r].x, x) < 0 {
 			u = u.nexts[r]
 		}
-		if u.nexts[r] != nil && utils.Compare(u.nexts[r].x, x) == 0 {
+		if u.nexts[r] != nil && utils.IntCompare(u.nexts[r].x, x) == 0 {
 			return false
 		}
 		ss.stack[r] = u
 		r--
 	}
 
-	w := ss.newNode(x,pickHeight())
+	w := newNode(x,pickHeight())
 	for ss.height < w.height {
 		ss.height++
 		ss.stack[ss.height] = ss.sentinel
@@ -117,22 +116,21 @@ func(ss * SkipListSSet) Add(x int) bool{
 
 //
 func (ss *SkipListSSet) Remove(x int) bool{
-	ok  = false
+	ok := false
 	u := ss.sentinel
-	r := height
+	r := ss.height
 
 	for r >= 0{
-		for u.nexts[r] != nil && utils.Compare(u.nexts[r].x,x) < 0{
+		for u.nexts[r] != nil && utils.IntCompare(u.nexts[r].x,x) < 0{
 			u = u.nexts[r]
 		}
 
-		if u.nexts[r] != nil && utils.Compare(u.nexts[r].x,x) == 0{
+		if u.nexts[r] != nil && utils.IntCompare(u.nexts[r].x,x) == 0{
 			ok = true
-			del = u.nexts[r]
 
 			u.nexts[r] = u.nexts[r].nexts[r]
 			if u == ss.sentinel && u.nexts[r] != nil{
-				height--
+				ss.height--
 			}
 		}
 		r--
