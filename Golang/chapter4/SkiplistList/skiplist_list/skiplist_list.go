@@ -34,3 +34,10 @@ func newNode(x int,h int,len int) *node{
 		nexts : make([]*node,h + 1),
 	}
 }
+
+type SkipListList struct{
+	sentinel *node
+	n int
+	height int
+	stack     [strconv.IntSize]*node
+}
