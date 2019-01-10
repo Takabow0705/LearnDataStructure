@@ -8,7 +8,7 @@ import(
 
 type node struct{
 	x int
-	length int
+	lengths int
 	height int
 	nexts []*node
 }
@@ -29,7 +29,7 @@ func pickHeight() int{
 func newNode(x int,h int,len int) *node{
 	return &node{
 		x : x,
-		length : len,
+		lengths: make([]int, h+1),
 		height : h,
 		nexts : make([]*node,h + 1),
 	}
