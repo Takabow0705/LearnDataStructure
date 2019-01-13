@@ -65,10 +65,14 @@ func (sl *SkipListList) findPred(int i) *node{
 	return u
 }
 
-func (sl *SkipListList) Get(i int){
+//i番目のnodeを見つけてその要素を返す
+func (sl *SkipListList) Get(i int)int{
 	return sl.findPred(i).nexts[0].x
 }
 
+//i番目の要素に指定された要素に入れ替える
+// i : 要素のインデックス
+// x : 挿入する要素
 func(sl *SkipListList) Set(i int,x int) int{
 	u := sl.findPred(i).nexts[0]
 	y := u.x
