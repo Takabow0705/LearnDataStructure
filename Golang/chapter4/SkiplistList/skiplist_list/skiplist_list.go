@@ -3,6 +3,7 @@ package skiplist_list
 import(
 	"math/rand"
 	"strconv"
+	"../../../utils"
 )
 
 type node struct{
@@ -28,7 +29,7 @@ func pickHeight() int{
 func newNode(x int,h int) *node{
 	return &node{
 		x : x,
-		lengths: make([]int, h+1),
+		lengths: make([]int, h + 1),
 		height : h,
 		nexts : make([]*node,h + 1),
 	}
@@ -81,17 +82,18 @@ func(sl *SkipListList) Set(i int,x int) int{
 }
 
 func(sl *SkipListList) Add(i int , x int){
-	w := sl.newNode(x,sl.pickHeight())
+	w := newNode(x,pickHeight())
 	if w.height > sl.height{
-		h = w.height
+		sl.height = w.height
 	}
 	sl.addNode(i,w)
 }
 
 
-func(sl *SkipListList) addNode(int i,w *node) *node{
-	u := sentinel
+func(sl *SkipListList) addNode(i int,w *node) *node{
+	u := sl.sentinel
 	r := sl.height
+	k := w.height
 	j := -1
 
 	for r >= 0{
@@ -114,29 +116,30 @@ func(sl *SkipListList) addNode(int i,w *node) *node{
 }
 
 func (sl *SkipListList) Remove(i int) interface{}{
-	x := nil
-	u := sentinel
+	var x int
+	u := sl.sentinel
 	r := sl.height
+	j := -1
 
 	for r >=0 {
-		for u.nexts[r] != nil && j + u.length[r] < i{
-			j += u.length[r]
+		for u.nexts[r] != nil && j + u.lengths[r] < i{
+			j += u.lengths[r]
 			u = u.nexts[r]
 		}
 		u.lengths[r]--
-		if j + u.lengths[r] + 1 == i && u.nexts[r] {
+		if j + u.lengths[r] + 1 == i && u.nexts[r] != nil{
 			x = u.nexts[r].x
 			u.lengths[r] += u.nexts[r].lengths[r]
 			u.nexts[r] = u.nexts[r].nexts[r]
 		}
 
-		if u== sentinel && u.nexts[r] != nil{
+		if u == sl.sentinel && u.nexts[r] != nil{
 			sl.height--
 		}
 		r--
 	}
 
-	if x != nil{
+	if utils.IsNil(x){
 		sl.n--
 	}	
 	return x
