@@ -1,4 +1,4 @@
 package calc_utils
 
-type func(int) int HashCalcStrategy
+type func() int HashCalcStrategy
 
