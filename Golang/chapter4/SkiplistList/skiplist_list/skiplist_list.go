@@ -142,3 +142,7 @@ func (sl *SkipListList) Remove(i int) interface{}{
 	}	
 	return x
 }
+
+func (sl *SkipListList) Size() int{
+	return sl.n
+}
