@@ -41,3 +41,38 @@ type SkipListList struct{
 	height int
 	stack     [strconv.IntSize]*node
 }
+
+func NewSkiplistList() *SkiplistList {
+	sl := SkiplistList{
+		sentinel: newNode(0, strconv.IntSize),
+	}
+	sl.stack[0] = ss.sentinel
+	return &sl
+}
+
+func (sl *SkipListList) findPred(int i) *node{
+	u := sl.sentinel
+	r := sl.height
+	j := -1
+
+	for r>=0 {
+		for u.nexts[r] != nil && j + u.lengths[r] < i{
+			j += u.lengths[r]
+			u = u.nexts[r]
+		}
+		r--
+	}
+	return u
+}
+
+func (sl *SkipListList) Get(i int){
+	return sl.findPred(i).nexts[0].x
+}
+
+func(sl *SkipListList) Set(i int,x int) int{
+	u := sl.findPred(i).nexts[0]
+	y := u.x
+	u.x = x
+
+	return y
+}
