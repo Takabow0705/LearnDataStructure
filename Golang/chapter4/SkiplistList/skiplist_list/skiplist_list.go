@@ -25,7 +25,7 @@ func pickHeight() int{
 	return height
 }
 
-func newNode(x int,h int,len int) *node{
+func newNode(x int,h int) *node{
 	return &node{
 		x : x,
 		lengths: make([]int, h+1),
@@ -41,15 +41,15 @@ type SkipListList struct{
 	stack     [strconv.IntSize]*node
 }
 
-func NewSkiplistList() *SkiplistList {
-	sl := SkiplistList{
+func NewSkiplistList() *SkipListList {
+	sl := SkipListList{
 		sentinel: newNode(0, strconv.IntSize),
 	}
-	sl.stack[0] = ss.sentinel
+	sl.stack[0] = sl.sentinel
 	return &sl
 }
 
-func (sl *SkipListList) findPred(int i) *node{
+func (sl *SkipListList) findPred(i int) *node{
 	u := sl.sentinel
 	r := sl.height
 	j := -1
