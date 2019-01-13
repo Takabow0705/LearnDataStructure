@@ -135,5 +135,6 @@ func (ss *SkipListSSet) Remove(x int) bool{
 		}
 		r--
 	}
+	ss.n--
 	return ok
 }
