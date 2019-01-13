@@ -85,7 +85,7 @@ func (ss *SkipListSSet) Find(x int) (ok bool ,result int){
 	
 }
 
-//
+//xを順序を保つように加えます。
 func(ss * SkipListSSet) Add(x int) bool{
 	u := ss.sentinel
 	r := ss.height
@@ -114,7 +114,7 @@ func(ss * SkipListSSet) Add(x int) bool{
 	return true
 }
 
-//
+//要素を1つ除去します。
 func (ss *SkipListSSet) Remove(x int) bool{
 	ok := false
 	u := ss.sentinel
