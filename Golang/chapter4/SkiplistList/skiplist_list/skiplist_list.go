@@ -8,7 +8,7 @@ import(
 
 type node struct{
 	x int
-	lengths int
+	lengths []int
 	height int
 	nexts []*node
 }
@@ -79,4 +79,66 @@ func(sl *SkipListList) Set(i int,x int) int{
 	u.x = x
 
 	return y
+}
+
+func(sl *SkipListList) Add(i int , x int){
+	w := sl.newNode(x,sl.pickHeight())
+	if w.height > sl.height{
+		h = w.height
+	}
+	sl.addNode(i,w)
+}
+
+
+func(sl *SkipListList) addNode(int i,w *node) *node{
+	u := sentinel
+	r := sl.height
+	j := -1
+
+	for r >= 0{
+		for u.nexts[r] != nil && j + u.lengths[r] < i{
+			j += u.lengths[r]
+			u = u.nexts[r]
+		}
+
+		u.lengths[r]++
+		if r <= k {
+			w.nexts[r] = u.nexts[r]
+			u.nexts[r] = w
+			w.lengths[r] = u.lengths[r] - (i - j)
+			u.lengths[r] = i - j
+		}
+		r--
+	}
+	sl.n++
+	return u
+}
+
+func (sl *SkipListList) Remove(i int) interface{}{
+	x := nil
+	u := sentinel
+	r := sl.height
+
+	for r >=0 {
+		for u.nexts[r] != nil && j + u.length[r] < i{
+			j += u.length[r]
+			u = u.nexts[r]
+		}
+		u.lengths[r]--
+		if j + u.lengths[r] + 1 == i && u.nexts[r] {
+			x = u.nexts[r].x
+			u.lengths[r] += u.nexts[r].lengths[r]
+			u.nexts[r] = u.nexts[r].nexts[r]
+		}
+
+		if u== sentinel && u.nexts[r] != nil{
+			sl.height--
+		}
+		r--
+	}
+
+	if x != nil{
+		sl.n--
+	}	
+	return x
 }
