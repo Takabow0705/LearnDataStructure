@@ -3,7 +3,6 @@ package skiplist_list
 import(
 	"math/rand"
 	"strconv"
-	"../../../utils"
 )
 
 type node struct{
