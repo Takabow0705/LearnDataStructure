@@ -2,13 +2,16 @@ package chained_hash_table
 
 type ChainedHashTable struct{
 	n int
-	array []string
+	array ArrayStack
 }
 
 func NewHashTable() *ChainHashTable{
-	return &ChainHasTable{
+	return &ChainHashTable{
 		n : 0,
-		array : make([]string,n + 1),
+		array : make([]ArrayStack,1<<1),
 	}
 }
 
+func (self *ChainHashTable) Add(x string){
+
+}
