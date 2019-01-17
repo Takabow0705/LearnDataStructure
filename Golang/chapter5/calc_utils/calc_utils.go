@@ -10,7 +10,8 @@ type func(x string,d uint64) uint64 HashCalcStrategy
 //d : 次数
 //x : 要素
 //具体的には以下の計算を実装する。
-// hash(x,d) = (z * uint64(x))
+// hash(x,d) = ( (z * uint64(x)) mod 2^w ) / 2^(w-d)
+//この場合 w = 64である。
 func MultipleHash(x string,d uint64) uint64{
 	return (rand.Uint64*Uint64(x)) >> (64 - d)
 }
