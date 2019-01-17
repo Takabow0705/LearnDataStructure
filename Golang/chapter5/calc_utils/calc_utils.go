@@ -13,7 +13,7 @@ type func(x string,d uint64) uint64 HashCalcStrategy
 // hash(x,d) = ( (z * uint64(x)) mod 2^w ) / 2^(w-d)
 //この場合 w = 64である。
 func MultipleHash(x string,d uint64) uint64{
-	return (rand.Uint64*Uint64(x)) >> (64 - d)
+	return (rand.Uint64*stringTouint64(x)) >> (64 - d)
 }
 
 func stringTouint64(x string) uint64{
