@@ -30,8 +30,8 @@ func (bt *BinaryTree) Depth(u *node) int {
 	return result
 }
 
-//ノードの数を返します。
-func (bt *BinaryTree) Size(u *node) int{
+//ノードの数を返す、Size() メソッドの補助関数です
+func (bt *BinaryTree) count_size_helper(u *node) int{
 	if u == nil {
 		return 0
 	}
@@ -39,4 +39,18 @@ func (bt *BinaryTree) Size(u *node) int{
 	return  1 + Size(u.left) + Size(u.right)
 }
 
+//ノードの数を返します。
+func (bt *BinaryTree) Size() int{
+	retrun count_size_helper(bt.r)
+}
+
+//ふたつの部分木の高さの最大値を返す、Height()メソッドの補助関数です
+//nodeがはじめからnilの時は-1が返る。
+func (bt *BinaryTree) measure_height_helper(u *node) int{
+	if u == nil{
+		return -1
+	}
+
+	return 1 + max(measure_height_helper(u.left),measure_height_helper(u.right))
+}
 
