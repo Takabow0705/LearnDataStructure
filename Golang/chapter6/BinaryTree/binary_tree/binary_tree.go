@@ -54,3 +54,20 @@ func (bt *BinaryTree) measure_height_helper(u *node) int{
 	return 1 + max(measure_height_helper(u.left),measure_height_helper(u.right))
 }
 
+//6.1.2の例示
+//スタックオーバーフローを考慮していない
+func (bt *BinaryTree) danger_traverse(u *node){
+	if u == nil return
+
+	danger_traverse(u.left)
+	danger_traverse(u.right)
+}
+
+//
+func (bt *BinaryTree) Safety_traverse(){
+	u := bt.r
+	prev := nil
+	var next *node
+
+	
+}
