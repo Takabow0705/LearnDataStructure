@@ -72,6 +72,7 @@ func (bt *BinaryTree) danger_traverse(u *node) {
 //prev : 以前のnode
 //next : 次の走査対象
 //u	   : 現在のnode
+//
 //規則:
 //prev == parent   => next = u.left
 //prev == u.left   => next = u.right
