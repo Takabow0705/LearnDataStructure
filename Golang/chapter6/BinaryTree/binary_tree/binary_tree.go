@@ -119,7 +119,9 @@ func (bt *BinaryTree) Safety_traverse() int {
 	return n
 }
 
+//走査の結果として訪問したnodeの数を返す
+//デフォルトは0
 func(bt *BinaryTree) SizeByTraverse() int{
-	u := bt.r
-
+	result := bt.Safety_traverse()
+	return result
 }
