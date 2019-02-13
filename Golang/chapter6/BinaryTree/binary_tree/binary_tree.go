@@ -65,7 +65,7 @@ func (bt *BinaryTree) danger_traverse(u *node) {
 	danger_traverse(u.right)
 }
 
-//どこから来たかによって次の行き先を決めることで
+//直前のnodeによって次のnodeを決めることで
 //再帰を使用せずに二分木を走査する。
 //以下の規則によって行き先を決定する
 //
@@ -77,35 +77,49 @@ func (bt *BinaryTree) danger_traverse(u *node) {
 //prev == parent   => next = u.left
 //prev == u.left   => next = u.right
 //prev == u.right  => next = u.left
-func (bt *BinaryTree) Safety_traverse() {
+func (bt *BinaryTree) Safety_traverse() int {
 	u := bt.r
 	prev := nil
+	n := 0
 	var next *node
+	
 
 	for u != nil {
 		if prev == u.parent && u.left != nil {
 			next = u.left
+			n++
 		}
 
 		if prev == u.parent && u.right != nil {
 			next = u.right
+			n++
 		}
 
 		if prev == u.parent && u.left == nil && u.right == nil {
 			next = u.parent
+			n++
 		}
 
 		if prev == u.left && u.right != nil {
 			next = u.right
+			n++
 		}
 		if prev == u.left && u.right == nil {
 			next = u.parent
+			n++
 		}
 		if prev == u.right {
 			next = u.parent
+			n++
 		}
 
 		prev = u
 		u = next
 	}
+	return n
+}
+
+func(bt *BinaryTree) SizeByTraverse() int{
+	u := bt.r
+
 }
