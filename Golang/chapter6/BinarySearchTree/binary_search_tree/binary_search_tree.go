@@ -77,10 +77,57 @@ func(bst *BinarySearchTree) Find(x int) (bool,interface{}){
 	return (false,w.x)
 }
 
+//xを二分探索木に保存します。
 func (bst *BinarySearchTree) Add(x int){
 	p := bst.findLast(x)
-	u := newNode()
+	u := bst.newNode()
 	u.x = x
 
 	return bst.addChild(p,u)
+}
+
+//探索の結果の最後のノードを返す。
+func (bst BinarySearchTree) findLast(x int) interface{}{
+	w := bst.r
+	var prev *node
+	
+	for w != nil{
+		prev = w
+		comp := utils.Compare(x,w.x)
+
+		if comp < 0{
+			w = w.left
+		}
+
+		if comp > 0{
+			w = w.right
+		}
+
+		if comp == 0{
+			return w
+		}
+
+		return prev
+	}
+}
+
+//
+func(bst BinarySearchTree) addChild(p *node,u *node) bool{
+
+	if p == nil{
+		bst.r = u
+	}else{
+		comp := utils.Compare(u.x,p.x)
+
+		if comp < 0{
+			p.left = u
+		}else if comp > 0{
+			p.right = u
+		}else{
+			return false
+		}
+		u.parent = p
+	}
+	bst.n++
+	retutn true
 }
