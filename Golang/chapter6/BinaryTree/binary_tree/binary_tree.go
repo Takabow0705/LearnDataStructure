@@ -1,5 +1,9 @@
 package binary_tree
 
+import(
+	"../../../utils"
+)
+
 type node struct {
 	left   *node
 	right  *node
@@ -7,14 +11,14 @@ type node struct {
 }
 
 func newNode() *node {
-	retrun & node{}
+	return & node{}
 }
 
 type BinaryTree struct {
 	r *node
 }
 
-func NewBT() *BTNode {
+func NewBT() *BinaryTree {
 	return &BinaryTree{}
 }
 
@@ -36,12 +40,12 @@ func (bt *BinaryTree) count_size_helper(u *node) int {
 		return 0
 	}
 
-	return 1 + Size(u.left) + Size(u.right)
+	return 1 + bt.count_size_helper(u.left) + bt.count_size_helper(u.right)
 }
 
 //ノードの数を返します。
 func (bt *BinaryTree) Size() int {
-	return count_size_helper(bt.r)
+	return bt.count_size_helper(bt.r)
 }
 
 //ふたつの部分木の高さの最大値を返す、Height()メソッドの補助関数です
@@ -51,11 +55,12 @@ func (bt *BinaryTree) measure_height_helper(u *node) int {
 		return -1
 	}
 
-	return 1 + max(measure_height_helper(u.left), measure_height_helper(u.right))
+	return 1 + utils.Max(bt.measure_height_helper(u.left), bt.measure_height_helper(u.right))
 }
 
 //6.1.2の例示
 //スタックオーバーフローを考慮していない
+/*
 func (bt *BinaryTree) danger_traverse(u *node) {
 	if u == nil {
 		return
@@ -64,6 +69,7 @@ func (bt *BinaryTree) danger_traverse(u *node) {
 	danger_traverse(u.left)
 	danger_traverse(u.right)
 }
+*/
 
 //直前のnodeによって次のnodeを決めることで
 //再帰を使用せずに二分木を走査する。
@@ -79,10 +85,9 @@ func (bt *BinaryTree) danger_traverse(u *node) {
 //prev == u.right  => next = u.left
 func (bt *BinaryTree) Safety_traverse() int {
 	u := bt.r
-	prev := nil
 	n := 0
 	var next *node
-	
+	var prev *node	
 
 	for u != nil {
 		if prev == u.parent && u.left != nil {
@@ -111,6 +116,9 @@ func (bt *BinaryTree) Safety_traverse() int {
 		if prev == u.right {
 			next = u.parent
 			n++
+		}
+		if prev == nil{
+			next = u.left
 		}
 
 		prev = u
@@ -141,8 +149,15 @@ func(bt *BinaryTree) BF_Traverse() int{
 		u := q[0]
 		q = q[1:]
 
-		if u.left != nil { q = append(q,u.left) n++ }
-		if u.right != nil { q = append(q,u.right) n++ }
+		if u.left != nil { 
+			q = append(q,u.left) 
+			n++ 
+		}
+
+		if u.right != nil { 
+			q = append(q,u.right) 
+			n++ 
+		}
 	}
 
 	return n
