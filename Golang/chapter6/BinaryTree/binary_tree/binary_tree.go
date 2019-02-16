@@ -125,3 +125,25 @@ func(bt *BinaryTree) SizeByTraverse() int{
 	result := bt.Safety_traverse()
 	return result
 }
+
+//幅優先探索による走査の実装
+func(bt *BinaryTree) BF_Traverse() int{
+	n := 0
+	q := make([]*node,0)
+
+	if bt.r != nil{
+		q = append(q,bt.r)
+	}
+
+	for len(q) > 0{
+		//キューを模倣する
+		//先頭の要素を取り出し、その後先頭要素を除いた配列を再代入する
+		u := q[0]
+		q = q[1:]
+
+		if u.left != nil { q = append(q,u.left) n++ }
+		if u.right != nil { q = append(q,u.right) n++ }
+	}
+
+	return n
+}
