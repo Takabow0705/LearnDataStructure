@@ -14,7 +14,7 @@ type BinaryTree struct {
 	r *node
 }
 
-func NewBTNOode() *BTNode {
+func NewBTNode() *BTNode {
 	return &BinaryTree{}
 }
 
