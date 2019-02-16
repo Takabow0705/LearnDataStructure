@@ -30,7 +30,7 @@ func(bst *BinarySearchTree) FindEQ(x int) interface{}{
 	w := bst.r
 
 	for w != nil{
-		comp := utils.compare(x,w.x)
+		comp := utils.Compare(x,w.x)
 
 		if comp < 0{
 			w = w.left
@@ -77,3 +77,10 @@ func(bst *BinarySearchTree) Find(x int) (bool,interface{}){
 	return (false,w.x)
 }
 
+func (bst *BinarySearchTree) Add(x int){
+	p := bst.findLast(x)
+	u := newNode()
+	u.x = x
+
+	return bst.addChild(p,u)
+}
