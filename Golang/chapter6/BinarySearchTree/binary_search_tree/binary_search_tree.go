@@ -45,3 +45,35 @@ func(bst *BinarySearchTree) FindEQ(x int) interface{}{
 		return nil
 	}
 }
+
+//探索を行い、探索の成否とデータを返す。
+//true 	=> 探索は成功、もう一方の戻り値は探索結果
+//false => 探索は失敗、もう一方の戻り値は最後に到達したnodeのデータ
+func(bst *BinarySearchTree) Find(x int) (bool,interface{}){
+	w := bst.r
+	var z *node
+
+	for w != nil{
+		comp := utils.Compare(x,z.x)
+
+		if comp < 0{
+			z = w
+			w = w.left
+		}
+
+		if comp > 0{
+			w = w.left
+		}
+
+		if comp == 0{
+			return (true,w.x)
+		}
+
+	}
+
+	if z == nil {
+		return (false,nil)
+	}
+	return (false,w.x)
+}
+
