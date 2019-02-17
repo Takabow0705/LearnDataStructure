@@ -111,7 +111,8 @@ func (bst BinarySearchTree) findLast(x int) interface{}{
 	}
 }
 
-//
+//新しい葉を保存するメソッド
+//保存が成功すれば true 失敗すれば false
 func(bst BinarySearchTree) addChild(p *node,u *node) bool{
 
 	if p == nil{
@@ -131,3 +132,4 @@ func(bst BinarySearchTree) addChild(p *node,u *node) bool{
 	bst.n++
 	retutn true
 }
+
