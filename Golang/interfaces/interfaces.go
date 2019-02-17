@@ -1,3 +1,5 @@
+package interfaces
+
 type Queue interface{
 	Add(x interface{})
 	Remove()
