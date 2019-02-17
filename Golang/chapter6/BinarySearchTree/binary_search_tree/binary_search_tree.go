@@ -87,7 +87,12 @@ func (bst *BinarySearchTree) Add(x int) bool{
 	u := newNode()
 	u.x = x
 
-	return bst.addChild(p,u)
+	result := bst.addChild(p,u)
+	if result {
+		bst.n++
+		return result
+	}
+	return result
 }
 
 //探索の結果の最後のノードを返す。
