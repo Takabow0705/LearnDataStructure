@@ -2,7 +2,6 @@ package binary_search_tree
 
 import(
 	"../../../utils"
-	"../../../interfaces/interfaces.go"
 )
 
 type node struct {
@@ -21,7 +20,7 @@ type BinarySearchTree struct {
 	n int
 }
 
-func NewBT() *BinarySearchTree {
+func NewBST() *BinarySearchTree {
 	return &BinarySearchTree{}
 }
 
@@ -31,7 +30,7 @@ func(bst *BinarySearchTree) FindEQ(x int) interface{}{
 	w := bst.r
 
 	for w != nil{
-		comp := utils.Compare(x,w.x)
+		comp := utils.IntCompare(x,w.x)
 
 		if comp < 0{
 			w = w.left
@@ -43,8 +42,8 @@ func(bst *BinarySearchTree) FindEQ(x int) interface{}{
 		if comp == 0{
 			return w.x
 		}
-		return nil
 	}
+	return nil
 }
 
 //探索を行い、探索の成否とデータを返す。
@@ -55,7 +54,7 @@ func(bst *BinarySearchTree) Find(x int) (bool,interface{}){
 	var z *node
 
 	for w != nil{
-		comp := utils.Compare(x,z.x)
+		comp := utils.IntCompare(x,z.x)
 
 		if comp < 0{
 			z = w
@@ -67,34 +66,34 @@ func(bst *BinarySearchTree) Find(x int) (bool,interface{}){
 		}
 
 		if comp == 0{
-			return (true,w.x)
+			return true,w.x
 		}
 
 	}
 
 	if z == nil {
-		return (false,nil)
+		return false,nil
 	}
-	return (false,w.x)
+	return false,w.x
 }
 
 //xを二分探索木に保存します。
-func (bst *BinarySearchTree) Add(x int){
+func (bst *BinarySearchTree) Add(x int) bool{
 	p := bst.findLast(x)
-	u := bst.newNode()
+	u := newNode()
 	u.x = x
 
 	return bst.addChild(p,u)
 }
 
 //探索の結果の最後のノードを返す。
-func (bst BinarySearchTree) findLast(x int) interface{}{
+func (bst BinarySearchTree) findLast(x int) *node{
 	w := bst.r
 	var prev *node
 	
 	for w != nil{
 		prev = w
-		comp := utils.Compare(x,w.x)
+		comp := utils.IntCompare(x,w.x)
 
 		if comp < 0{
 			w = w.left
@@ -108,8 +107,8 @@ func (bst BinarySearchTree) findLast(x int) interface{}{
 			return w
 		}
 
-		return prev
 	}
+	return prev
 }
 
 //新しい葉を保存するメソッド
@@ -119,7 +118,7 @@ func(bst BinarySearchTree) addChild(p *node,u *node) bool{
 	if p == nil{
 		bst.r = u
 	}else{
-		comp := utils.Compare(u.x,p.x)
+		comp := utils.IntCompare(u.x,p.x)
 
 		if comp < 0{
 			p.left = u
@@ -131,7 +130,7 @@ func(bst BinarySearchTree) addChild(p *node,u *node) bool{
 		u.parent = p
 	}
 	bst.n++
-	retutn true
+	return true
 }
 
 //nodeの削除後にツリーの連続性を確保します。
@@ -144,8 +143,8 @@ func(bst *BinarySearchTree) splice(u *node){
 		s = u.right
 	}
 	
-	if u == r{
-		r = s
+	if u == bst.r{
+		bst.r = s
 	}else{
 		p = u.parent
 
@@ -159,7 +158,7 @@ func(bst *BinarySearchTree) splice(u *node){
 	if s != nil{
 		s.parent = p
 	}
-	n--
+	bst.n--
 }
 
 func(bst *BinarySearchTree) Remove(u *node){
@@ -172,7 +171,7 @@ func(bst *BinarySearchTree) Remove(u *node){
 		for w.left != nil{
 			w = w.left
 			u.x = w.x
-			splice(w)
+			bst.splice(w)
 		}
 	}
 }
