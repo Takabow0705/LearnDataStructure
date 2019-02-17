@@ -2,6 +2,7 @@ package binary_search_tree
 
 import(
 	"../../../utils"
+	"../../../interfaces/interfaces.go"
 )
 
 type node struct {
@@ -159,4 +160,19 @@ func(bst *BinarySearchTree) splice(u *node){
 		s.parent = p
 	}
 	n--
+}
+
+func(bst *BinarySearchTree) Remove(u *node){
+	if u.left == nil || u.right == nil{
+		bst.splice(u)
+		return
+	}else{
+		w := u.right
+
+		for w.left != nil{
+			w = w.left
+			u.x = w.x
+			splice(w)
+		}
+	}
 }
