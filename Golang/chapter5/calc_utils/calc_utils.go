@@ -3,8 +3,20 @@ package calc_utils
 import(
 	"math/rand"
 	"strconv"
+	"calc_utils/hash_type_enum"
 )
-type func(x string,d uint64) uint64 HashCalcStrategy
+type func(x string,d uint64) uint64 HashFunc
+
+func HashTypeStrategy(hashtype HashType) HashFunc{
+	switch hashtype{
+	case MultipleHash:
+		//MultipleHashの無名関数
+		//下記実装を参照
+		return func(x string,d uint64){
+			return (rand.Uint64*stringTouint64(x)) >> (64 - d)
+		}
+	}
+}
 
 //乗算ハッシュ法を実装します。 
 //d : 次数
