@@ -16,4 +16,5 @@ func main(){
 	fmt.Println(bst.Size())
 	fmt.Println(bst.Find(0))
 	fmt.Println(bst.FindEQ(21))
+	fmt.Println(&bst)
 }

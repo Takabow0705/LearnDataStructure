@@ -58,7 +58,7 @@ func(bst *BinarySearchTree) Find(x int) (bool,interface{}){
 	var z *node
 
 	for w != nil{
-		comp := utils.IntCompare(x,z.x)
+		comp := utils.IntCompare(x,w.x)
 
 		if comp < 0{
 			z = w
@@ -86,8 +86,15 @@ func (bst *BinarySearchTree) Add(x int) bool{
 	p := bst.findLast(x)
 	u := newNode()
 	u.x = x
-
 	result := bst.addChild(p,u)
+
+	//初期状態はbst.rもnilだからこの条件が必要
+	if p == nil{
+		bst.r = u
+		bst.n++
+		return true
+	}
+
 	if result {
 		bst.n++
 		return result
@@ -103,7 +110,7 @@ func (bst BinarySearchTree) findLast(x int) *node{
 	for w != nil{
 		prev = w
 		comp := utils.IntCompare(x,w.x)
-
+		
 		if comp < 0{
 			w = w.left
 		}
@@ -157,7 +164,7 @@ func(bst *BinarySearchTree) splice(u *node){
 	}else{
 		p = u.parent
 
-		if p.left == u{
+		if &p.left == &u{
 			p.left = s
 		}else{
 			p.right = s
