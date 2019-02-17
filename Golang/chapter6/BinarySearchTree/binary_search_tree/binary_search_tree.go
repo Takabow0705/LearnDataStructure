@@ -24,6 +24,10 @@ func NewBST() *BinarySearchTree {
 	return &BinarySearchTree{}
 }
 
+//二分木の要素数を返します。
+func (bst *BinarySearchTree) Size() int{
+	return bst.n
+}
 //二分探索木の探索を行い、探索結果を返します。
 //存在するならデータを、しないならnilを返します。
 func(bst *BinarySearchTree) FindEQ(x int) interface{}{
