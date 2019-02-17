@@ -133,3 +133,30 @@ func(bst BinarySearchTree) addChild(p *node,u *node) bool{
 	retutn true
 }
 
+//nodeの削除後にツリーの連続性を確保します。
+func(bst *BinarySearchTree) splice(u *node){
+	var s,p *node
+
+	if u.left != nil{
+		s = u.left
+	}else{
+		s = u.right
+	}
+	
+	if u == r{
+		r = s
+	}else{
+		p = u.parent
+
+		if p.left == u{
+			p.left = s
+		}else{
+			p.right = s
+		}
+	}
+
+	if s != nil{
+		s.parent = p
+	}
+	n--
+}
