@@ -16,3 +16,9 @@ type struct Treap{
 	r *node
 	n int
 }
+
+func createTreap() *Treap{
+	return &Treap{
+		n : 0
+	}
+}
