@@ -2,6 +2,7 @@ package random_bst
 
 import(
 	"../../../utils"
+	"math/rand"
 )
 
 type struct node{
@@ -158,4 +159,26 @@ func(t *Treap) addChild(p *node,u *node) bool{
 	}
 	t.n++
 	return true
+}
+
+
+func (t *Treap) Add(x int) bool{
+	u := createNode(x)
+	u.p = rand.Int()
+	lastNode := t.findLast(x)
+
+	var added bool
+
+	if lastNode == nil{
+		t.r = u
+		added = true
+	}else{
+		added = t.addChild(lastNode,u)
+	}
+
+	if added == true {
+		t.n++
+		t.bubble_up(newNode)
+	}
+	return added
 }
