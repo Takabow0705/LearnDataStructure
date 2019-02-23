@@ -84,3 +84,56 @@ func (t *Treap) rotateRight(u *node){
 		r.parent = nil
 	}
 }
+
+//探索の結果の最後のノードを返す。
+func (t Treap) findLast(x int) *node{
+	w := t.r
+	var prev *node
+	
+	for w != nil{
+		prev = w
+		comp := utils.IntCompare(x,w.x)
+		
+		if comp < 0{
+			w = w.left
+		}
+
+		if comp > 0{
+			w = w.right
+		}
+
+		if comp == 0{
+			return w
+		}
+
+	}
+	return prev
+}
+
+//nodeの削除後にツリーの連続性を確保します。
+func(t *Treap) splice(u *node){
+	var s,p *node
+
+	if u.left != nil{
+		s = u.left
+	}else{
+		s = u.right
+	}
+	
+	if u == t.r{
+		t.r = s
+	}else{
+		p = u.parent
+
+		if &p.left == &u{
+			p.left = s
+		}else{
+			p.right = s
+		}
+	}
+
+	if s != nil{
+		s.parent = p
+	}
+	t.n--
+}
