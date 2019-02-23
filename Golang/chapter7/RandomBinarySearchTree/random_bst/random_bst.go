@@ -161,7 +161,7 @@ func(t *Treap) addChild(p *node,u *node) bool{
 	return true
 }
 
-
+//二分探索木に新しい要素を加える。
 func (t *Treap) Add(x int) bool{
 	u := createNode(x)
 	u.p = rand.Int()
@@ -183,6 +183,7 @@ func (t *Treap) Add(x int) bool{
 	return added
 }
 
+//対象ノードを適切な位置に再配置する。
 func (t *Treap) bubble_up(u *node){
 	for u.parent != nil && u.parent.p > u.p{
 		if u.parent.right == u {
@@ -196,6 +197,7 @@ func (t *Treap) bubble_up(u *node){
 	}
 }
 
+//二分探索木から要素を削除
 func(t *Treap) Remove(x int) bool{
 	u :=findLast(x)
 	
@@ -207,4 +209,26 @@ func(t *Treap) Remove(x int) bool{
 	}
 
 	return false
+}
+
+//削除対象のデータを末尾に沈める。
+//以下の規則に従って回転の方向を決める。
+// u.left u.right いずれも nil => u は葉だから回転しない
+// u.left u.right の一方が nil => nilではない方と回転
+// u.left.p < u.right.p        => 右に回転、優先度の大小が逆なら左に回転
+func (t *Treap) trickle_down(u *node){
+	for u.left != nil | u.right != nil{
+		if u.left == nil{
+			t.rotateLeft(u)
+		}else if u.right = nil{
+			t.rotateRight(u)
+		}else if u.left.p < u.right.p{
+			t.rotateRight(u)
+		}else{
+			t.rotateLeft(u)
+		}
+		if(t.r == u){
+			t.r = u.parent
+		}
+	}
 }
