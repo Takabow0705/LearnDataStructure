@@ -5,7 +5,7 @@ import(
 	"math/rand"
 )
 
-type struct node{
+type node struct{
 	x int
 	left *node
 	right *node
@@ -15,22 +15,22 @@ type struct node{
 
 func createNode(x int) *node{
 	return &node{
-		x : x
+		x : x,
 	}
 }
-type struct Treap{
+type Treap struct{
 	r *node
 	n int
 }
 
 func CreateTreap() *Treap{
 	return &Treap{
-		n : 0
+		n : 0,
 	}
 }
 
 //データ数を返す。
-func (t *Treap) Size(){
+func (t *Treap) Size()int{
 	return t.n
 }
 
@@ -44,7 +44,7 @@ func (t *Treap) rotateLeft(u *node){
 	if w.parent != nil && w.parent.left == u{
 		w.parent.left = w
 	}
-	if w.parent != nil && w.parent.right == u{{
+	if w.parent != nil && w.parent.right == u{
 		w.parent.right = w
 	}
 	
@@ -87,7 +87,7 @@ func (t *Treap) rotateRight(u *node){
 
 	if u == t.r{
 		t.r = w
-		r.parent = nil
+		t.r.parent = nil
 	}
 }
 
@@ -183,7 +183,7 @@ func (t *Treap) Add(x int) bool{
 
 	if added == true {
 		t.n++
-		t.bubble_up(newNode)
+		t.bubble_up(u)
 	}
 	return added
 }
@@ -204,10 +204,10 @@ func (t *Treap) bubble_up(u *node){
 
 //二分探索木から要素を削除
 func(t *Treap) Remove(x int) bool{
-	u :=findLast(x)
+	u := t.findLast(x)
 	
-	if u != nil && utils.compare(u.x,x) == 0{
-		t.trickleDown(u)
+	if u != nil && utils.IntCompare(u.x,x) == 0{
+		t.trickle_down(u)
 		t.splice(u)
 
 		return true
@@ -222,10 +222,10 @@ func(t *Treap) Remove(x int) bool{
 // u.left u.right の一方が nil => nilではない方と回転
 // u.left.p < u.right.p        => 右に回転、優先度の大小が逆なら左に回転
 func (t *Treap) trickle_down(u *node){
-	for u.left != nil | u.right != nil{
+	for u.left != nil || u.right != nil{
 		if u.left == nil{
 			t.rotateLeft(u)
-		}else if u.right = nil{
+		}else if u.right == nil{
 			t.rotateRight(u)
 		}else if u.left.p < u.right.p{
 			t.rotateRight(u)
