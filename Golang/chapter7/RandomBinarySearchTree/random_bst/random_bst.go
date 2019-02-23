@@ -17,7 +17,7 @@ type struct Treap{
 	n int
 }
 
-func createTreap() *Treap{
+func CreateTreap() *Treap{
 	return &Treap{
 		n : 0
 	}
