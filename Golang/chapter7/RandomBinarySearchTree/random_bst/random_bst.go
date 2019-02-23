@@ -182,6 +182,7 @@ func (t *Treap) Add(x int) bool{
 	}
 	return added
 }
+
 func (t *Treap) bubble_up(u *node){
 	for u.parent != nil && u.parent.p > u.p{
 		if u.parent.right == u {
@@ -193,4 +194,17 @@ func (t *Treap) bubble_up(u *node){
 	if u.parent == nil{
 		t.r = u
 	}
+}
+
+func(t *Treap) Remove(x int) bool{
+	u :=findLast(x)
+	
+	if u != nil && utils.compare(u.x,x) == 0{
+		t.trickleDown(u)
+		t.splice(u)
+
+		return true
+	}
+
+	return false
 }
