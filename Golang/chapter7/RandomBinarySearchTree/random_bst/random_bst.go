@@ -29,6 +29,11 @@ func CreateTreap() *Treap{
 	}
 }
 
+//データ数を返す。
+func (t *Treap) Size(){
+	return t.n
+}
+
 //二分探索木の左回転を実装する。
 func (t *Treap) rotateLeft(u *node){
 	w := u.right
