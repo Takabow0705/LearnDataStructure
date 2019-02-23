@@ -12,6 +12,11 @@ type struct node{
 	p int //priority
 }
 
+func createNode(x int) *node{
+	return &node{
+		x : x
+	}
+}
 type struct Treap{
 	r *node
 	n int
