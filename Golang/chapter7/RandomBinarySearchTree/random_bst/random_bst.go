@@ -22,3 +22,33 @@ func createTreap() *Treap{
 		n : 0
 	}
 }
+
+//二分探索木の左回転を実装する。
+func (t *Treap) rotateLeft(u *node){
+	w := u.right
+	w.parent = u.parent
+
+	//uの親ノードの子ノードをwに切り替える。
+	//左右どちらにあるかで場合分け
+	if w.parent != nil && w.parent.left == u{
+		w.parent.left = w
+	}
+	if w.parent != nil && w.parent.right == u{{
+		w.parent.right = w
+	}
+	
+	u.right = w.left
+
+	//ノードuに付け替えた、ノードwの左子要素の親をノードuに設定する。
+	if u.right != nil{
+		u.right.parent = u
+	}
+	u.parent = w
+	w.left = u
+
+	//uがrootノードの時の処理
+	if u == t.r {
+		t.r = w
+		t.r.parent = nil
+	}
+}
