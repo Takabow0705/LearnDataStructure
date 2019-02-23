@@ -182,3 +182,15 @@ func (t *Treap) Add(x int) bool{
 	}
 	return added
 }
+func (t *Treap) bubble_up(u *node){
+	for u.parent != nil && u.parent.p > u.p{
+		if u.parent.right == u {
+			t.rotateLeft(u.parent)
+		}else{
+			t.rotateRight(u.parent)
+		}
+	}
+	if u.parent == nil{
+		t.r = u
+	}
+}
