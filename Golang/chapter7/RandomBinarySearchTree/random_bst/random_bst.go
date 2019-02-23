@@ -137,3 +137,25 @@ func(t *Treap) splice(u *node){
 	}
 	t.n--
 }
+
+//新しい葉を保存するメソッド
+//保存が成功すれば true 失敗すれば false
+func(t *Treap) addChild(p *node,u *node) bool{
+
+	if p == nil{
+		t.r = u
+	}else{
+		comp := utils.IntCompare(u.x,p.x)
+
+		if comp < 0{
+			p.left = u
+		}else if comp > 0{
+			p.right = u
+		}else{
+			return false
+		}
+		u.parent = p
+	}
+	t.n++
+	return true
+}
