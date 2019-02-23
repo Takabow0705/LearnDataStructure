@@ -52,3 +52,30 @@ func (t *Treap) rotateLeft(u *node){
 		t.r.parent = nil
 	}
 }
+
+//二分探索木の右回転を実装
+//実装の詳細は左回転の場合と同じ
+func (t *Treap) rotateRight(u *node){
+	w := u.left
+	w.parent = u.parent
+
+	if w.parent != nil && w.parent.left == u{
+		w.parent.left = w
+	}
+	if w.parent != nil && w.parent.right == u{
+		w.parent.right = w
+	}
+
+	u.left = w.right
+
+	if u.left != nil{
+		u.left.parent = u
+	}
+	u.parent = w
+	w.right = u
+
+	if u == t.r{
+		t.r = w
+		r.parent = nil
+	}
+}
