@@ -86,7 +86,7 @@ func (t *Treap) rotateRight(u *node){
 }
 
 //探索の結果の最後のノードを返す。
-func (t Treap) findLast(x int) *node{
+func (t *Treap) findLast(x int) *node{
 	w := t.r
 	var prev *node
 	
