@@ -1,5 +1,8 @@
 package dl_list
 
+import (
+	"fmt"
+)
 
 type node struct{
 	x string
@@ -112,5 +115,18 @@ func (dl *DLList) Remove(i int) string{
 //最後の要素を削除する
 func (dl *DLList) Pop() string{
 	return dl.remove_i(dl.n - 1)
+}
+
+//保持しているデータをstringとして返す。
+func (dl *DLList) String() string{
+	result := ""
+	n := dl.Size()
+
+	for i:=0; i < n; i++{
+		str := fmt.Sprintf("{%d:%s},\n", i , dl.Get(i))
+		result += str
+	}
+
+	return result
 }
 

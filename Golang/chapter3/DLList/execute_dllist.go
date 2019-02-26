@@ -17,4 +17,5 @@ func main(){
 	fmt.Println(list.Size())
 	list.Add("foo")
 	fmt.Println(list.Size())
+	fmt.Println(list.String())
 }
