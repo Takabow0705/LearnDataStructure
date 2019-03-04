@@ -2,10 +2,11 @@ package array_queue
 
 import(
 	"../../../utils"
+	"fmt"
 )
 
 type ArrayQueue struct{
-	buf []utils.T
+	buf []string
 	n ,cap ,i int
 }
 
@@ -18,7 +19,7 @@ func NewArrayQueue() ArrayQueue{
 //配列の指定位置に要素を追加します
 //また、容量が不足している場合は
 //resize()を呼び出して、配列の大きさを増やします。
-func (aq *ArrayQueue) Add(v utils.T){
+func (aq *ArrayQueue) Add(v string){
 
 	if aq.is_full(){
 		aq.resize()
@@ -30,7 +31,7 @@ func (aq *ArrayQueue) Add(v utils.T){
 
 //i番目以降の要素を全てひとつ後ろにずらします。
 //これにより、i番目に新しい要素を入れることが可能となります。
-func (aq *ArrayQueue) Remove()utils.T{
+func (aq *ArrayQueue) Remove()string{
 
 	ret := aq.buf[aq.i]
 	aq.i = (aq.i  + 1)%aq.cap
@@ -49,7 +50,7 @@ func (aq *ArrayQueue) Size() int{
 }
 
 //削除対象の要素を返します。
-func (aq *ArrayQueue) Get() utils.T{
+func (aq *ArrayQueue) Get() string{
 	return aq.buf[aq.i]
 }
 //使用されている配列の要素数と配列の容量を比較します。
@@ -62,7 +63,7 @@ func (aq *ArrayQueue) is_full() bool{
 //新しい配列をレシーバの構造体の配列として再設定します。
 func (aq *ArrayQueue) resize(){
 	cap_new := utils.Max(2 * aq.n,1) 
-	buf_new := make([]utils.T,cap_new)
+	buf_new := make([]string,cap_new)
 
 	for i:=0; i < aq.n; i++{
 		buf_new[i] = aq.buf[(i+aq.i)%aq.cap]
@@ -78,4 +79,15 @@ func (aq *ArrayQueue) is_sparse() bool{
 	return len(aq.buf) >= 3 * aq.n
 }
 
+//データ構造を文字列として返します。
+func (aq *ArrayQueue) String() string{
+	result := ""
+	size := aq.Size()
+
+	for i:=0; i < size; i++{
+		str := fmt.Sprintf("{%d:%s},\n",i, aq.buf[i])
+		result += str
+	}
+	return result
+}
 
