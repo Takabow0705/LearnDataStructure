@@ -28,6 +28,7 @@ public class LinkedList<T>{
 
         if(n == 0){
             this.setTail(u);
+        }
             this.increment();
         }
         return x;
