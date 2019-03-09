@@ -29,8 +29,7 @@ public class LinkedList<T>{
         if(n == 0){
             this.setTail(u);
         }
-            this.increment();
-        }
+        this.increment();
         return x;
     }
 
@@ -116,6 +115,10 @@ public class LinkedList<T>{
             String format = "{data[%d] : %s}\r\n";
             String nodeString = String.format(format,this.n - i,node.toString());
             allDataString += nodeString;
+
+            if(Objects.isNull(node.getNext())){
+                break;
+            }
             node = node.getNext();
         }
 
