@@ -250,6 +250,7 @@ func (st *ScapegoatTree) packIntoArray(u *node,a []*node,i int) int{
 	a[i] = u
 	return packIntoArray(u.right,a,i)
 }
+//TODO 何してるかわからん
 func (st *ScapegoatTree) buildBalance(a []*node, i int ,ns int) *node{
 	if ns == 0{
 		return nil
