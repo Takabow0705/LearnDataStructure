@@ -193,6 +193,8 @@ func(st *ScapegoatTree) Remove(u *node){
 	}
 }
 
+//node u以下の葉の高さを再構築する。
+//具体的には任意の葉の高さの差が高々1となるようにする。
 func (st *ScapegoatTree) rebuild(u *node){
 	ns := st.Size()
 	p := u.parent
@@ -212,7 +214,7 @@ func (st *ScapegoatTree) rebuild(u *node){
 	}
 }
 
-func (st *ScapegoatTree) packIntoArray(u *node,a.[]*node,i int) int{
+//uより下の葉を配列に格納し、nilとなったらその添字を返す。
 	if u == nil{
 		return i
 	}
