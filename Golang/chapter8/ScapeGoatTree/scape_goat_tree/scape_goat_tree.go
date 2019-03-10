@@ -257,3 +257,28 @@ func log32(n int) int {
 	return int(math.Log(float64(n)) / math.Log(3.0/2))
 }
 
+//ツリーに新しい要素を追加する。
+//その際、以下の条件を満たすかチェックする。
+// st.q / 2 <= st.Size() <= st.q
+func (st *ScapegoatTree) Add(x utils.V) bool {
+	u := &node{x: x}
+	d := st.addWithDepth(u)
+
+	// st.q / 2 <= st.Size() <= st.q
+	if d > log32(st.q) {
+		w := u.parent
+		a := size_subtree(w)
+		b := size_subtree(w.parent)
+
+		// (size(w.child) / size(w)) > 2/3
+		for 3*a <= 2*b {
+			w = w.parent
+			a = size_subtree(w)
+			b = size_subtree(w.parent)
+		}
+		st.rebuild(w.parent)
+	} else if d < 0 {
+		return false
+	}
+	return true
+}
