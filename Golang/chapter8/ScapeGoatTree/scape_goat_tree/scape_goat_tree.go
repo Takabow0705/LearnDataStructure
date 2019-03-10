@@ -250,3 +250,10 @@ func (st *ScapegoatTree) buildBalance(a []*node, i int ,ns int) *node{
 	}
 	return a[i+m]
 }
+
+//スケープゴートツリーの木の高さを計算するための関数
+//log_(3/2)を自然対数関数で表現した
+func log32(n int) int {
+	return int(math.Log(float64(n)) / math.Log(3.0/2))
+}
+
