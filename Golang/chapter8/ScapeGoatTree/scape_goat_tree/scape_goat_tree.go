@@ -224,3 +224,22 @@ func (st *ScapegoatTree) packIntoArray(u *node,a []*node,i int) int{
 	a[i] = u
 	return packIntoArray(u.right,a,i)
 }
+func (st *ScapegoatTree) buildBalance(a []*node, i int ,ns int) *node{
+	if ns == 0{
+		return nil
+	}
+
+	m := ns / 2
+	a[i+m].left = st.buildBalanced(a, i, m)
+
+	if a[i+m].left != nil {
+		a[i+m].left.parent = a[i+m]
+	}
+
+	a[i+m].right = st.buildBalanced(a, i+m+1, ns-m-1)
+
+	if a[i+m].right != nil {
+		a[i+m].right.parent = a[i+m]
+	}
+	return a[i+m]
+}
