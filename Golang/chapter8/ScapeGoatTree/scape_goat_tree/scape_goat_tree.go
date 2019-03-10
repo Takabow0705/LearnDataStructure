@@ -186,18 +186,37 @@ func(st *ScapegoatTree) splice(u *node){
 }
 
 func(st *ScapegoatTree) Remove(u *node){
-	if u.left == nil || u.right == nil{
-		st.splice(u)
-		return
-	}else{
-		w := u.right
-
-		for w.left != nil{
-			w = w.left
-			u.x = w.x
-			st.splice(w)
+	if st.remove_value(x) {
+		if 2*st.n < st.q {
+			if st.r != nil {
+				st.rebuild(st.r)
+			}
+			st.q = st.n
 		}
+		return true
 	}
+	return false
+}
+func (st *ScapegoatTree) remove_value(x utils.V) bool {
+	node := st.findLast(x)
+	if node != nil && utils.Compare(x, node.x) == 0 {
+		st.removeNode(node)
+		return true
+	}
+	return false
+}
+func (st *ScapegoatTree) removeNode(node *node) {
+	if node.left == nil || node.right == nil {
+		st.splice(node)
+	} else {
+		minInRight := node.right
+		for minInRight.left != nil {
+			minInRight = minInRight.left
+		}
+		node.x = minInRight.x
+		st.splice(minInRight)
+	}
+	st.n--
 }
 
 //node u以下の葉の高さを再構築する。
