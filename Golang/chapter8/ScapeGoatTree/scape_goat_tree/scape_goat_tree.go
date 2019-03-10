@@ -215,6 +215,7 @@ func (st *ScapegoatTree) rebuild(u *node){
 }
 
 //uより下の葉を配列に格納し、nilとなったらその添字を返す。
+func (st *ScapegoatTree) packIntoArray(u *node,a []*node,i int) int{
 	if u == nil{
 		return i
 	}
