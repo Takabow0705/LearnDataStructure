@@ -5,7 +5,7 @@ import(
 )
 
 type ArrayStack struct{
-	buf []utils.T
+	buf []string
 	n ,cap int
 }
 
@@ -21,14 +21,14 @@ func (as *ArrayStack) Size() int{
 }
 
 //配列の最後尾の要素を追加します
-func (as *ArrayStack) Pop() utils.T{
+func (as *ArrayStack) Pop() string{
 	return as.Remove(as.n-1)
 }
 
 //配列の指定位置に要素を追加します
 //また、容量が不足している場合は
 //resize()を呼び出して、配列の大きさを増やします。
-func (as *ArrayStack) Add(i int,v utils.T){
+func (as *ArrayStack) Add(i int,v string){
 
 	if as.is_full(){
 		as.resize()
@@ -44,7 +44,7 @@ func (as *ArrayStack) Add(i int,v utils.T){
 
 //i番目以降の要素を全てひとつ後ろにずらします。
 //これにより、i番目に新しい要素を入れることが可能となります。
-func (as *ArrayStack) Remove(i int)utils.T{
+func (as *ArrayStack) Remove(i int)string{
 
 	ret := as.buf[i]
 	for j:= i; j < as.n-1; j++{
@@ -60,17 +60,17 @@ func (as *ArrayStack) Remove(i int)utils.T{
 }
 
 //配列の最後尾に要素を追加します。
-func (as *ArrayStack) Push(v utils.T){
+func (as *ArrayStack) Push(v string){
 	as.Add(as.n,v)
 }
 
 //i番目の要素を返します。
-func (as *ArrayStack) Get(i int) utils.T{
+func (as *ArrayStack) Get(i int) string{
 	return as.buf[i]
 }
 
 //i番目の要素をvで入れ替え、以前の要素を返す。
-func (as *ArrayStack) Set(i int,v utils.T) utils.T{
+func (as *ArrayStack) Set(i int,v string) string{
 	ret := as.buf[i]
 	as.buf[i] = v
 
@@ -86,7 +86,7 @@ func (as *ArrayStack) is_full() bool{
 //新しい配列をレシーバの構造体の配列として再設定します。
 func (as *ArrayStack) resize(){
 	as.cap = utils.Max(2 * as.n,1) 
-	buf_new := make([]utils.T,as.cap)
+	buf_new := make([]string,as.cap)
 
 	for i:=0; i < as.n; i++{
 		buf_new[i] = as.buf[i]

@@ -24,7 +24,7 @@ func (da *DualArrayDeque) Size() int{
 //frontとbackのArrayStackで
 //なるべく要素数が等しくなるように要素を保持している。
 //ゆえに引数のインデックス次第で取得対象のArrayStackが変わる。
-func (da *DualArrayDeque) Get(i int) utils.T{
+func (da *DualArrayDeque) Get(i int) string{
 	if i < da.front.Size(){
 		return da.front.Get(da.front.Size() - i - 1)
 	}else{
@@ -35,7 +35,7 @@ func (da *DualArrayDeque) Get(i int) utils.T{
 //frontとbackのArrayStackで
 //なるべく要素数が等しくなるように要素を保持している。
 //ゆえに引数のインデックス次第で挿入対象のArrayStackが変わる。
-func (da *DualArrayDeque) Set(i int,x utils.T) utils.T{
+func (da *DualArrayDeque) Set(i int,x string) string{
 	if i < da.front.Size(){
 		return da.front.Set(da.front.Size() - i - 1,x)
 	}else{
@@ -47,7 +47,7 @@ func (da *DualArrayDeque) Set(i int,x utils.T) utils.T{
 //追加後にfrontとbackで要素数がなるべく等しくなるように
 //balance()を呼び出す。
 //ArrayQueue同様に追加後はnを1増やす。
-func (da *DualArrayDeque) Add(i int, x utils.T){
+func (da *DualArrayDeque) Add(i int, x string){
 	if i < da.front.Size(){
 		da.front.Add(da.front.Size() - i ,x)
 	}else{
@@ -62,8 +62,8 @@ func (da *DualArrayDeque) Add(i int, x utils.T){
 //削除後にfrontとbackで要素数がなるべく等しくなるように
 //balance()を呼び出す。
 //ArrayQueue同様に追加後はnを1減らす。
-func (da *DualArrayDeque) Remove(i int) utils.T{
-	var result utils.T
+func (da *DualArrayDeque) Remove(i int) string{
+	var result string
 	if i < da.front.Size(){
 		result = da.front.Remove(da.front.Size() - i - 1)
 	}else{
