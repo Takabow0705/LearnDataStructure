@@ -25,6 +25,13 @@ func NewScapegoatTree() *ScapegoatTree {
 	return &ScapegoatTree{}
 }
 
+//引数のnodeを根とした場合のサイズを返します。
+func size_subtree(n *node) int {
+	if n == nil {
+		return 0
+	}
+	return size_subtree(n.left) + size_subtree(n.right) + 1
+}
 //二分木の要素数を返します。
 func (st *ScapegoatTree) Size() int{
 	return st.n
