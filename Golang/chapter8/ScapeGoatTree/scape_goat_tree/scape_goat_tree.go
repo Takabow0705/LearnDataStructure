@@ -203,8 +203,8 @@ func (st *ScapegoatTree) rebuild(u *node){
 	st.packIntoArray(u,a,0)
 
 	if p == nil {
-		r = st.buildBalance(a,0,ns)
-		r.parent = nil
+		st.r = st.buildBalance(a,0,ns)
+		st.r.parent = nil
 	}else if p.right == u{
 		p.right = buildBalance(a,0,ns)
 		p.right.parent = p
