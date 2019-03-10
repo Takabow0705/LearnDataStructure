@@ -224,7 +224,7 @@ func (st *ScapegoatTree) removeNode(node *node) {
 func (st *ScapegoatTree) rebuild(u *node){
 	ns := st.Size()
 	p := u.parent
-	a := make(*node,ns)
+	a := make([]*node,ns)
 
 	st.packIntoArray(u,a,0)
 
@@ -250,6 +250,7 @@ func (st *ScapegoatTree) packIntoArray(u *node,a []*node,i int) int{
 	a[i] = u
 	return packIntoArray(u.right,a,i)
 }
+
 //TODO 何してるかわからん
 func (st *ScapegoatTree) buildBalance(a []*node, i int ,ns int) *node{
 	if ns == 0{
