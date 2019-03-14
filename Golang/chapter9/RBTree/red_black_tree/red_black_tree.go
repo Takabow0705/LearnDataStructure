@@ -85,6 +85,12 @@ func (t *Treap) rotateLeft(u *node){
 	}
 }
 
+//flipLeftの反対を実行する
+func(rbt *RedBlackTree) flipRight(u *node){
+	swapColors(u,u.left)
+	rotateRight(u)
+}
+
 //二分探索木の右回転を実装
 //実装の詳細は左回転の場合と同じ
 func (t *Treap) rotateRight(u *node){
