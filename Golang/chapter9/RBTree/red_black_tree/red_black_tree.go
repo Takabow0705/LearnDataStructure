@@ -47,6 +47,14 @@ func(rbt *RedBlackTree) pullBlack(u *node){
 	u.right.color = RED
 }
 
+//uが左傾的で無いときに、左傾性を維持するために実行する。
+//uが左傾的とは以下の条件を満たす時である。
+//u.left.color = BLACK && u.right.color = RED
+func(rbt *RedBlackTree) flipLeft(u *node){
+	swapcolors(u,u.right)
+	rbt.rotateRight()
+}
+
 //二分探索木の左回転を実装する。
 func (t *Treap) rotateLeft(u *node){
 	w := u.right
