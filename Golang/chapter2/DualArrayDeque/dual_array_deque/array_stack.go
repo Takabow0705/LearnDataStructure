@@ -100,4 +100,9 @@ func (as *ArrayStack) is_sparse() bool{
 	return len(as.buf) >= 3 * as.n
 }
 
+func (as *ArrayStack) String() string{
+	for s i:= range buf{
+
+	}
+}
 

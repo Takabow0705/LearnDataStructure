@@ -12,11 +12,11 @@ func main(){
 
 	//ToDo not use resize() and balance()?
 	fmt.Println(dad.Size())
-	dad.Add(0,utils.T(3))
-	dad.Add(0,utils.T(45))
-	dad.Add(0,utils.T(232))
+	dad.Add(0,string(3))
+	dad.Add(0,string(45))
+	dad.Add(0,string(232))
 	fmt.Println(dad.Size())
-	dad.Add(0,utils.T(45))
-	dad.Add(0,utils.T(232))
+	dad.Add(0,string(45))
+	dad.Add(0,string(232))
 	fmt.Println(dad.Size())
 }

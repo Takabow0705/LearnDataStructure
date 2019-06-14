@@ -51,7 +51,7 @@ func(rbt *RedBlackTree) pullBlack(u *node){
 //uが左傾的とは以下の条件を満たす時である。
 //u.left.color = BLACK && u.right.color = RED
 func(rbt *RedBlackTree) flipLeft(u *node){
-	swapcolors(u,u.right)
+	swapColors(u,u.right)
 	rbt.rotateRight()
 }
 
@@ -117,3 +117,4 @@ func (t *Treap) rotateRight(u *node){
 		t.r.parent = nil
 	}
 }
+
